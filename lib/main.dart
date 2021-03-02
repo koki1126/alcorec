@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => Record(),
               ),
+              //現状飛ばない
             );
           },
           child: Icon(
