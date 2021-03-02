@@ -11,18 +11,61 @@ class Record extends StatelessWidget {
         builder: (context, model, child) {
           return GestureDetector(
             onTap: () {
-              model.shopFocusNode.unfocus();
+              model.memberFocusNode.unfocus();
+              model.priceFocusNode.unfocus();
+              model.memoFocusNode.unfocus();
             },
             child: Container(
-              color: Colors.green,
+              color: Colors.white,
               child: Column(
                 children: [
+                  // todo 過去飲んだ酒の履歴
+                  // todo 最新順に表示する
+                  Container(
+                    color: Colors.grey,
+                    height: 200,
+                    width: double.infinity,
+                    child: Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: [
+                        Container(
+                          color: Colors.green,
+                          height: 80,
+                          width: 80,
+                        ),
+                        Container(
+                          color: Colors.blue,
+                          height: 80,
+                          width: 80,
+                        ),
+                        Container(
+                          color: Colors.yellow,
+                          height: 80,
+                          width: 80,
+                        ),
+                      ],
+                    ),
+                  ),
                   TextField(
-                    focusNode: model.shopFocusNode,
-                    controller: model.shopEditingController,
-                    keyboardType: TextInputType.number, // キーボードは数値のみ
+                    focusNode: model.memberFocusNode,
+                    controller: model.memberEditingController,
                     decoration: InputDecoration(
-                      labelText: '日付',
+                      labelText: '誰と飲んだ？',
+                    ),
+                  ),
+                  TextField(
+                    focusNode: model.priceFocusNode,
+                    controller: model.priceEditingController,
+                    decoration: InputDecoration(
+                      labelText: '飲食代',
+                    ),
+                  ),
+                  TextField(
+                    focusNode: model.memoFocusNode,
+                    controller: model.memoEditingController,
+                    decoration: InputDecoration(
+                      labelText: 'メモ',
                     ),
                   ),
                 ],
