@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   provider: ^4.3.3
+  flutter_calendar_carousel: ^1.5.3
 
   cupertino_icons: ^1.0.0
 
