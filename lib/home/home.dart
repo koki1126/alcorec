@@ -11,8 +11,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeModel>(
       create: (_) => HomeModel(),
+      //ここまでおまじない
       child: Consumer<HomeModel>(
         builder: (context, model, child) {
+          //以下を監視
           return Container(
             child: Text('aaaaa'),
           );
