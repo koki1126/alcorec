@@ -1,6 +1,8 @@
+import 'package:alcorec/header.dart';
 import 'package:alcorec/record/record_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '';
 
 class Record extends StatelessWidget {
   @override
@@ -10,6 +12,7 @@ class Record extends StatelessWidget {
       child: Consumer<RecordModel>(
         builder: (context, model, child) {
           return Scaffold(
+            appBar: Header(headerWord: '酒プラス'),
             body: GestureDetector(
               onTap: () {
                 model.memberFocusNode.unfocus();
