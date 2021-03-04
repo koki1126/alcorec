@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 
 class RecordModel extends ChangeNotifier {
-  FocusNode shopFocusNode = FocusNode();
+  FocusNode palceFocusNode = FocusNode();
+  FocusNode memberFocusNode = FocusNode();
+  FocusNode priceFocusNode = FocusNode();
+  FocusNode memoFocusNode = FocusNode();
 
-  TextEditingController shopEditingController;
+  TextEditingController palceEditingController;
+  TextEditingController memberEditingController;
+  TextEditingController priceEditingController;
+  TextEditingController memoEditingController;
 }

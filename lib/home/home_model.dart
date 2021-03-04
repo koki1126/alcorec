@@ -35,8 +35,7 @@ class HomeModel extends ChangeNotifier {
   DateTime currentDate = DateTime.now();
 
   void onDayPressed(DateTime date, List<Event> events) {
-    //setstateの書き換え方法がわからない
     // this.setState(() = > _currentDate = date);
-    Fluttertoast.showToast(msg: date.toString());
+    Fluttertoast.showToast(msg: date.toString(), textColor: Colors.pink);
   }
 }
