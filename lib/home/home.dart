@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Alcohol '),
+              title: Text('こんにちは'),
             ),
 
             body: Container(
@@ -31,19 +31,19 @@ class HomePage extends StatelessWidget {
                   prevMonthDayBorderColor: Colors.grey.shade400,
                   selectedDayButtonColor: Colors.yellowAccent.shade700,
                   weekFormat: false,
-                  height: 420.0,
+                  height: 400,
+                  weekDayBackgroundColor: Colors.blue.shade100,
                   selectedDateTime: model.currentDate,
                   daysHaveCircularBorder: true,
                   // customGridViewPhysics: NeverScrollableScrollPhysics(),
                   markedDateShowIcon: true,
                   markedDateIconMaxShown: 3,
                   todayTextStyle: TextStyle(
-                    color: Colors.blue,
+                    color: Colors.black,
                   ),
                   markedDateIconBuilder: (event) {
                     return event.icon;
                   },
-                  // todayBorderColor: Colors.green,
                   markedDateMoreShowTotal: false),
             ),
 
