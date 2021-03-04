@@ -2,7 +2,7 @@ import 'package:alcorec/header.dart';
 import 'package:alcorec/record/record_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '';
+import 'package:alcorec/header.dart';
 
 class Record extends StatelessWidget {
   @override

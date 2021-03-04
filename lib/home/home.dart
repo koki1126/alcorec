@@ -1,22 +1,54 @@
 import 'package:alcorec/home/home_model.dart';
 import 'package:alcorec/main.dart';
 import 'package:alcorec/record/record.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart';
-// import 'package:flutter_calendar_carousel/classes/event.dart';
+import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
+    show CalendarCarousel;
+import 'package:flutter_calendar_carousel/classes/event.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<HomeModel>(
       create: (_) => HomeModel(),
+      //ここまでおまじない
       child: Consumer<HomeModel>(
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('酒プラス'),
+              title: Text('こんにちは'),
             ),
+
+            body: Container(
+              child: CalendarCarousel<Event>(
+                  onDayPressed: model.onDayPressed,
+                  weekendTextStyle: TextStyle(color: Colors.red),
+                  nextMonthDayBorderColor: Colors.grey.shade400,
+                  thisMonthDayBorderColor: Colors.yellow.shade700,
+                  prevMonthDayBorderColor: Colors.grey.shade400,
+                  selectedDayButtonColor: Colors.yellowAccent.shade700,
+                  weekFormat: false,
+                  height: 400,
+                  weekDayBackgroundColor: Colors.blue.shade100,
+                  selectedDateTime: model.currentDate,
+                  daysHaveCircularBorder: true,
+                  // customGridViewPhysics: NeverScrollableScrollPhysics(),
+                  markedDateShowIcon: true,
+                  markedDateIconMaxShown: 3,
+                  todayTextStyle: TextStyle(
+                    color: Colors.black,
+                  ),
+                  markedDateIconBuilder: (event) {
+                    return event.icon;
+                  },
+                  markedDateMoreShowTotal: false),
+            ),
+
+            //ここまで
+
             floatingActionButtonLocation:
                 FloatingActionButtonLocation.centerDocked,
             floatingActionButton: FloatingActionButton(
@@ -71,3 +103,14 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+// CalendarCarousel<Event>(
+//   onDayPressed: onDayPressed, MaterialColor thisMonthDayBorderColor,
+// )
+
+// DateTime _curerntDate = Datetime.now();
+
+// void onDayPressed(DateTime date, List<Event> events){
+//   this.setState(() => _curerntDate = date);
+//   Fluttertoast.showToast(msg: date.toString());
+// }
