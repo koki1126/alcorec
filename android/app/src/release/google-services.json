@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "1002245536688",
+    "project_id": "alcorec-b23ab",
+    "storage_bucket": "alcorec-b23ab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1002245536688:android:7b7cb7c988f2eb87087475",
+        "android_client_info": {
+          "package_name": "com.roastedgt.alcorec"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1002245536688-l6lcgopd44hk62kmnjaj7q6acal17sor.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB20pUmNciLr00KNWuw8po-JX9S6D8Q7oI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1002245536688-l6lcgopd44hk62kmnjaj7q6acal17sor.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1002245536688-a5v6dmvcoc0g39pufcsa7cdr8r3e6v03.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.roastedgt.alcorec"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
