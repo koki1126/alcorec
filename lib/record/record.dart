@@ -43,25 +43,52 @@ class Record extends StatelessWidget {
                       ),
                     ),
 
-                    RaisedButton(
-                      child: Text('メンバーを追加'),
-                      color: Colors.orange,
-                      textColor: Colors.white,
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (_) {
-                            return ChangeNotifierProvider<MemberDialogModel>(
-                              create: (_) => MemberDialogModel(),
-                              child: Consumer<MemberDialogModel>(
-                                builder: (context, model, child) {
-                                  return MemberDialog();
-                                },
-                              ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        RaisedButton(
+                          child: Text('追加'),
+                          color: Colors.orange,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return ChangeNotifierProvider<
+                                    MemberDialogModel>(
+                                  create: (_) => MemberDialogModel(),
+                                  child: Consumer<MemberDialogModel>(
+                                    builder: (context, model, child) {
+                                      return MemberDialog();
+                                    },
+                                  ),
+                                );
+                              },
                             );
                           },
-                        );
-                      },
+                        ),
+                        RaisedButton(
+                          child: Text('新規'),
+                          color: Colors.orange,
+                          textColor: Colors.white,
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return ChangeNotifierProvider<
+                                    MemberDialogModel>(
+                                  create: (_) => MemberDialogModel(),
+                                  child: Consumer<MemberDialogModel>(
+                                    builder: (context, model, child) {
+                                      return MemberDialog();
+                                    },
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      ],
                     ),
 
                     TextField(

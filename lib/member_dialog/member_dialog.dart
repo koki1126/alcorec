@@ -19,10 +19,10 @@ class MemberDialog extends StatelessWidget {
                 itemCount: 5,
                 itemBuilder: (BuildContext context, int index) {
                   return CheckboxListTile(
-                    value: model.user1,
-                    title: Text("user1"),
+                    value: model.createCheckbox(index),
+                    title: Text(index.toString()),
                     onChanged: (value) {
-                      model.checkboxChange(value);
+                      model.tapCheckbox(index, value);
                     },
                   );
                 },
