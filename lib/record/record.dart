@@ -15,7 +15,6 @@ class Record extends StatelessWidget {
             appBar: Header(headerWord: '酒プラス'),
             body: GestureDetector(
               onTap: () {
-                model.memberFocusNode.unfocus();
                 model.priceFocusNode.unfocus();
                 model.memoFocusNode.unfocus();
               },
@@ -38,26 +37,60 @@ class Record extends StatelessWidget {
                             height: 80,
                             width: 80,
                           ),
-                          Container(
-                            color: Colors.blue,
-                            height: 80,
-                            width: 80,
-                          ),
-                          Container(
-                            color: Colors.yellow,
-                            height: 80,
-                            width: 80,
-                          ),
                         ],
                       ),
                     ),
-                    TextField(
-                      focusNode: model.memberFocusNode,
-                      controller: model.memberEditingController,
-                      decoration: InputDecoration(
-                        labelText: '誰と飲んだ？',
-                      ),
+
+                    RaisedButton(
+                      child: Text('メンバーを追加'),
+                      color: Colors.orange,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (_) {
+                            return AlertDialog(
+                              title: Text('メンバーを追加'),
+                              content: Container(
+                                height: 300.0,
+                                width: 300.0,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  itemCount: 5,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return CheckboxListTile(
+                                      value: model.user1,
+                                      title: Text("user1"),
+                                      //onChanged: (value){
+                                      //setState(() {
+                                      //user1=value;
+                                      //});
+                                      //},
+                                      onChanged: (value) {
+                                        model.checkboxChange(value);
+                                      },
+                                    );
+                                  },
+                                ),
+                              ),
+                              actions: <Widget>[
+                                // ボタン領域
+                                FlatButton(
+                                  child: Text("Cancel"),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                                FlatButton(
+                                  child: Text("OK"),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
                     ),
+
                     TextField(
                       focusNode: model.priceFocusNode,
                       controller: model.priceEditingController,
