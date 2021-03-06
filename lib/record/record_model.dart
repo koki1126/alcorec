@@ -6,12 +6,4 @@ class RecordModel extends ChangeNotifier {
 
   TextEditingController priceEditingController;
   TextEditingController memoEditingController;
-
-  bool user1 = false;
-  void checkboxChange(value) {
-    print(value);
-    user1 = value;
-    notifyListeners();
-    print('notifyListenrs');
-  }
 }

@@ -1,8 +1,10 @@
 import 'package:alcorec/header.dart';
+import 'package:alcorec/member_dialog/member_dialog.dart';
 import 'package:alcorec/record/record_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:alcorec/header.dart';
+import '../member_dialog/member_dialog_model.dart';
 
 class Record extends StatelessWidget {
   @override
@@ -49,42 +51,13 @@ class Record extends StatelessWidget {
                         showDialog(
                           context: context,
                           builder: (_) {
-                            return AlertDialog(
-                              title: Text('メンバーを追加'),
-                              content: Container(
-                                height: 300.0,
-                                width: 300.0,
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  itemCount: 5,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return CheckboxListTile(
-                                      value: model.user1,
-                                      title: Text("user1"),
-                                      //onChanged: (value){
-                                      //setState(() {
-                                      //user1=value;
-                                      //});
-                                      //},
-                                      onChanged: (value) {
-                                        model.checkboxChange(value);
-                                      },
-                                    );
-                                  },
-                                ),
+                            return ChangeNotifierProvider<MemberDialogModel>(
+                              create: (_) => MemberDialogModel(),
+                              child: Consumer<MemberDialogModel>(
+                                builder: (context, model, child) {
+                                  return MemberDialog();
+                                },
                               ),
-                              actions: <Widget>[
-                                // ボタン領域
-                                FlatButton(
-                                  child: Text("Cancel"),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                                FlatButton(
-                                  child: Text("OK"),
-                                  onPressed: () => Navigator.pop(context),
-                                ),
-                              ],
                             );
                           },
                         );
