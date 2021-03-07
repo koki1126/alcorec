@@ -59,7 +59,11 @@ class Record extends StatelessWidget {
                                   create: (_) => MemberDialogModel(),
                                   child: Consumer<MemberDialogModel>(
                                     builder: (context, model, child) {
-                                      return MemberDialog();
+                                      //return MemberDialog();
+                                      return Provider<String>.value(
+                                        value: 'add',
+                                        child: MemberDialog(),
+                                      );
                                     },
                                   ),
                                 );
@@ -80,7 +84,11 @@ class Record extends StatelessWidget {
                                   create: (_) => MemberDialogModel(),
                                   child: Consumer<MemberDialogModel>(
                                     builder: (context, model, child) {
-                                      return MemberDialog();
+                                      //return MemberDialog();
+                                      return Provider<String>.value(
+                                        value: 'new',
+                                        child: MemberDialog(),
+                                      );
                                     },
                                   ),
                                 );

@@ -9,37 +9,62 @@ class MemberDialog extends StatelessWidget {
       create: (_) => MemberDialogModel(),
       child: Consumer<MemberDialogModel>(
         builder: (context, model, child) {
-          return AlertDialog(
-            title: Text('メンバーを追加'),
-            content: Container(
-              height: 300.0,
-              width: 300.0,
-              child: ListView.builder(
-                shrinkWrap: true,
-                itemCount: 5,
-                itemBuilder: (BuildContext context, int index) {
-                  return CheckboxListTile(
-                    value: model.createCheckbox(index),
-                    title: Text(index.toString()),
-                    onChanged: (value) {
-                      model.tapCheckbox(index, value);
-                    },
-                  );
-                },
-              ),
-            ),
-            actions: <Widget>[
-              // ボタン領域
-              FlatButton(
-                child: Text("Cancel"),
-                onPressed: () => Navigator.pop(context),
-              ),
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () => Navigator.pop(context),
-              ),
-            ],
-          );
+          return 'add' == Provider.of<String>(context)
+              ? AlertDialog(
+                  title: Text('メンバーを追加'),
+                  content: Container(
+                    height: 300.0,
+                    width: 300.0,
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: model.memberCount(),
+                      itemBuilder: (BuildContext context, int index) {
+                        return CheckboxListTile(
+                          value: model.createCheckbox(index),
+                          title: Text(index.toString()),
+                          onChanged: (value) {
+                            model.tapCheckbox(index, value);
+                          },
+                        );
+                      },
+                    ),
+                  ),
+                  actions: <Widget>[
+                    // ボタン領域
+                    FlatButton(
+                      child: Text("Cancel"),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    FlatButton(
+                      child: Text("OK"),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                  ],
+                )
+              : AlertDialog(
+                  title: Text('メンバーを新規追加'),
+                  content: TextField(
+                    controller: model.newMemberController,
+                    decoration: InputDecoration(
+                      labelText: '名前を入力',
+                    ),
+                  ),
+                  actions: <Widget>[
+                    // ボタン領域
+                    FlatButton(
+                      child: Text("Cancel"),
+                      onPressed: () => Navigator.pop(context),
+                    ),
+                    FlatButton(
+                      child: Text("OK"),
+                      onPressed: () {
+                        // todo Firestoreに新規メンバーを登録
+                        print(model.newMemberController.text);
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                );
         },
       ),
     );
