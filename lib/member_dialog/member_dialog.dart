@@ -58,7 +58,7 @@ class MemberDialog extends StatelessWidget {
                     FlatButton(
                       child: Text("OK"),
                       onPressed: () {
-                        // todo Firestoreに新規メンバーを登録
+                        // todo 新規メンバーを登録
                         print(model.newMemberController.text);
                         Navigator.pop(context);
                       },

@@ -42,7 +42,6 @@ class Record extends StatelessWidget {
                         ],
                       ),
                     ),
-
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -112,6 +111,14 @@ class Record extends StatelessWidget {
                       decoration: InputDecoration(
                         labelText: 'メモ',
                       ),
+                    ),
+                    RaisedButton(
+                      child: Text('登録'),
+                      color: Colors.orange,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        // todo 登録処理
+                      },
                     ),
                   ],
                 ),
