@@ -31,7 +31,7 @@ class HomePage extends StatelessWidget {
                   prevMonthDayBorderColor: Colors.grey.shade400,
                   selectedDayButtonColor: Colors.yellowAccent.shade700,
                   weekFormat: false,
-                  height: 400,
+                  height: 500,
                   weekDayBackgroundColor: Colors.blue.shade100,
                   selectedDateTime: model.currentDate,
                   daysHaveCircularBorder: true,
