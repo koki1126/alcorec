@@ -15,17 +15,27 @@ class MemberDialog extends StatelessWidget {
                   content: Container(
                     height: 300.0,
                     width: 300.0,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: model.memberCount(),
-                      itemBuilder: (BuildContext context, int index) {
-                        return CheckboxListTile(
-                          value: model.createCheckbox(index),
-                          title: Text(index.toString()),
-                          onChanged: (value) {
-                            model.tapCheckbox(index, value);
-                          },
-                        );
+                    child: FutureBuilder(
+                      //future: model.dbHelper.queryRowCount(),
+                      future: model.query(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CheckboxListTile(
+                                value: model.createCheckbox(index),
+                                title: Text(index.toString()),
+                                onChanged: (value) {
+                                  model.tapCheckbox(index, value);
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          return CircularProgressIndicator(); // データをロードできていなけれなぐるぐるを表示
+                        }
                       },
                     ),
                   ),
@@ -61,6 +71,43 @@ class MemberDialog extends StatelessWidget {
                         // todo 新規メンバーを登録
                         print(model.newMemberController.text);
                         Navigator.pop(context);
+                      },
+                    ),
+
+                    RaisedButton(
+                      child: Text(
+                        'insert',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.insert();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'query',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.query();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'update',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.update();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'delete',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.delete();
                       },
                     ),
                   ],
