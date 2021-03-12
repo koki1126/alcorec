@@ -83,4 +83,13 @@ class DatabaseHelper {
     Database db = await instance.database;
     return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
   }
+
+  // ! DB削除
+  Future databaseDelete() async {
+    print('delete');
+    // Get a location using getDatabasesPath
+    var databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, 'alcorec.db');
+    await deleteDatabase(path);
+  }
 }

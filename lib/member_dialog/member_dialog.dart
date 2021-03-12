@@ -70,6 +70,7 @@ class MemberDialog extends StatelessWidget {
                       onPressed: () {
                         // todo 新規メンバーを登録
                         print(model.newMemberController.text);
+                        model.insert();
                         Navigator.pop(context);
                       },
                     ),
@@ -108,6 +109,15 @@ class MemberDialog extends StatelessWidget {
                       ),
                       onPressed: () {
                         model.delete();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'DatabaseDelete',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.dbHelper.databaseDelete();
                       },
                     ),
                   ],
