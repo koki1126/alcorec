@@ -1,17 +1,17 @@
-import 'dart:io';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path_provider/path_provider.dart';
+import 'migration_scripts.dart';
 
 class DatabaseHelper {
   static final _databaseName = "alcorec.db"; // DB名
-  static final _databaseVersion = 1; // 1で固定？
+  // dbのバージョンを指定
+  static final _databaseVersion = 1;
 
   static final table = 'alcorec'; // テーブル名
 
+  // dbカラム
   static final columnId = '_id'; // 列1
   static final columnName = 'name'; // 列2
-  static final columnAge = 'age'; // 列3
 
   // DatabaseHelperクラスをシングルトンにするためのコンストラクタ
   DatabaseHelper._privateConstructor();
@@ -20,33 +20,41 @@ class DatabaseHelper {
   // DBにアクセスするためのメソッド
   static Database _database;
   Future<Database> get database async {
-    if (_database != null) return _database;
+    //if (_database != null) return _database;
     // 初の場合はDBを作成する
+    print('initDatabase');
     _database = await _initDatabase();
+    print('initDatabaseおわり');
+
     return _database;
   }
 
   // データベースを開く。データベースがない場合は作る関数
   _initDatabase() async {
-    Directory documentsDirectory =
-        await getApplicationDocumentsDirectory(); // アプリケーション専用のファイルを配置するディレクトリへのパスを返す
-    String path =
-        join(documentsDirectory.path, _databaseName); // joinはセパレーターでつなぐ関数
-    // pathのDBを開く。なければonCreateの処理がよばれる。onCreateでは_onCreateメソッドを呼び出している
-    return await openDatabase(path,
-        version: _databaseVersion, onCreate: _onCreate);
-  }
+    //Directory documentsDirectory =
 
-  // DBを作成するメソッド
-  Future _onCreate(Database db, int version) async {
-    // ダブルクォートもしくはシングルクォート3つ重ねることで改行で文字列を作成できる。$変数名は、クラス内の変数のこと（文字列の中で使える）
-    await db.execute('''
-          CREATE TABLE $table (
-            $columnId INTEGER PRIMARY KEY,
-            $columnName TEXT NOT NULL,
-            $columnAge INTEGER NOT NULL
-          )
-          ''');
+    // dbのパス
+    var databasesPath = await getDatabasesPath();
+    String path = join(databasesPath, _databaseName);
+
+    int migrationScriptsLength = migrationScripts.length;
+    return await openDatabase(
+      path,
+      version: migrationScriptsLength,
+      onCreate: (Database db, int version) async {
+        print('onCreate');
+        for (int i = 1; i <= migrationScriptsLength; i++) {
+          //for (int i = 1; i <= version; i++) {
+          await db.execute(migrationScripts[i]);
+        }
+      },
+      onUpgrade: (Database db, int oldVersion, int newVersion) async {
+        print('onUpgrade');
+        for (int i = oldVersion + 1; i <= newVersion; i++) {
+          await db.execute(migrationScripts[i]);
+        }
+      },
+    );
   }
 
   // Helper methods

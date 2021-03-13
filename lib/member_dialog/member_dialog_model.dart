@@ -27,7 +27,6 @@ class MemberDialogModel extends ChangeNotifier {
   void insert() async {
     Map<String, dynamic> row = {
       DatabaseHelper.columnName: 'Bob',
-      DatabaseHelper.columnAge: 23
     };
     final id = await dbHelper.insert(row);
     print('inserted row id: $id');
@@ -46,7 +45,6 @@ class MemberDialogModel extends ChangeNotifier {
     Map<String, dynamic> row = {
       DatabaseHelper.columnId: 1,
       DatabaseHelper.columnName: 'Mary',
-      DatabaseHelper.columnAge: 32
     };
     final rowsAffected = await dbHelper.update(row);
     print('updated $rowsAffected row(s)');
