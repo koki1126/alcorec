@@ -7,7 +7,7 @@ class DatabaseHelper {
   // dbのバージョンを指定
   static final _databaseVersion = 1;
 
-  static final table = 'alcorec'; // テーブル名
+  static final table = 'member'; // テーブル名
 
   // dbカラム
   static final columnId = '_id'; // 列1
@@ -22,9 +22,7 @@ class DatabaseHelper {
   Future<Database> get database async {
     //if (_database != null) return _database;
     // 初の場合はDBを作成する
-    print('initDatabase');
     _database = await _initDatabase();
-    print('initDatabaseおわり');
 
     return _database;
   }

@@ -15,15 +15,18 @@ class MemberDialogModel extends ChangeNotifier {
     notifyListeners();
   }
 
-// todo 登録されているメンバーを取得
-  int memberCount() {
-    return 50;
-  }
-
   // database_helper.dartのDataBaseHelperをインスタンス化
   final dbHelper = DatabaseHelper.instance;
 
-  // データを登録
+  void memberInsert() async {
+    Map<String, dynamic> row = {
+      DatabaseHelper.columnName: newMemberController.text,
+    };
+    final id = await dbHelper.insert(row);
+    print('register new member row id: $id');
+  }
+
+  // テストデータを登録
   void insert() async {
     Map<String, dynamic> row = {
       DatabaseHelper.columnName: 'Bob',

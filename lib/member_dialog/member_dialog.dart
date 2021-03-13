@@ -68,13 +68,14 @@ class MemberDialog extends StatelessWidget {
                     FlatButton(
                       child: Text("OK"),
                       onPressed: () {
-                        // todo 新規メンバーを登録
-                        print(model.newMemberController.text);
-                        model.insert();
+                        model.newMemberController.text != ''
+                            ? model.memberInsert()
+                            : null; // 新規メンバーを追加
                         Navigator.pop(context);
                       },
                     ),
 
+                    // todo 別でデバッグ用のダイアログを作る
                     RaisedButton(
                       child: Text(
                         'insert',
