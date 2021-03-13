@@ -16,8 +16,7 @@ class MemberDialog extends StatelessWidget {
                     height: 300.0,
                     width: 300.0,
                     child: FutureBuilder(
-                      //future: model.dbHelper.queryRowCount(),
-                      future: model.query(),
+                      future: model.registeredMember(),
                       builder: (BuildContext context, AsyncSnapshot snapshot) {
                         if (snapshot.hasData) {
                           return ListView.builder(
@@ -26,7 +25,7 @@ class MemberDialog extends StatelessWidget {
                             itemBuilder: (BuildContext context, int index) {
                               return CheckboxListTile(
                                 value: model.createCheckbox(index),
-                                title: Text(index.toString()),
+                                title: Text(snapshot.data[index]['name']),
                                 onChanged: (value) {
                                   model.tapCheckbox(index, value);
                                 },

@@ -26,10 +26,17 @@ class MemberDialogModel extends ChangeNotifier {
     print('register new member row id: $id');
   }
 
+  // 全クエリを取得
+  Future<dynamic> registeredMember() async {
+    final allRows = await dbHelper.queryAllRows();
+    return allRows;
+  }
+
   // テストデータを登録
   void insert() async {
+    // テストデータ
     Map<String, dynamic> row = {
-      DatabaseHelper.columnName: 'Bob',
+      DatabaseHelper.columnName: 'user',
     };
     final id = await dbHelper.insert(row);
     print('inserted row id: $id');
@@ -45,9 +52,10 @@ class MemberDialogModel extends ChangeNotifier {
 
   // データを更新
   void update() async {
+    // テストデータ
     Map<String, dynamic> row = {
       DatabaseHelper.columnId: 1,
-      DatabaseHelper.columnName: 'Mary',
+      DatabaseHelper.columnName: 'update user',
     };
     final rowsAffected = await dbHelper.update(row);
     print('updated $rowsAffected row(s)');

@@ -29,8 +29,6 @@ class DatabaseHelper {
 
   // データベースを開く。データベースがない場合は作る関数
   _initDatabase() async {
-    //Directory documentsDirectory =
-
     // dbのパス
     var databasesPath = await getDatabasesPath();
     String path = join(databasesPath, _databaseName);
@@ -39,6 +37,7 @@ class DatabaseHelper {
     return await openDatabase(
       path,
       version: migrationScriptsLength,
+      // dbがなければ実行
       onCreate: (Database db, int version) async {
         print('onCreate');
         for (int i = 1; i <= migrationScriptsLength; i++) {
@@ -46,6 +45,7 @@ class DatabaseHelper {
           await db.execute(migrationScripts[i]);
         }
       },
+      // dbはあるがmigration_scripts.dartにsqlが追加されていたら実行される
       onUpgrade: (Database db, int oldVersion, int newVersion) async {
         print('onUpgrade');
         for (int i = oldVersion + 1; i <= newVersion; i++) {
