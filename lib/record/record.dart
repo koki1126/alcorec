@@ -46,175 +46,190 @@ class Record extends StatelessWidget {
                     // ),
 
                     //お酒の記録
-
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 20,
-                          width: double.infinity,
-                          child: Text(
-                            'お酒の記録',
-                            textAlign: TextAlign.left,
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                            width: double.infinity,
+                            child: Text(
+                              'お酒の記録',
+                              textAlign: TextAlign.left,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: double.infinity,
-                          child: RaisedButton(
-                            child: Text('過去の記録から'),
-                            color: Colors.orange,
-                            textColor: Colors.white,
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) {
-                                  return ChangeNotifierProvider<
-                                      MemberDialogModel>(
-                                    create: (_) => MemberDialogModel(),
-                                    child: Consumer<MemberDialogModel>(
-                                      builder: (context, model, child) {
-                                        //return MemberDialog();
-                                        return Provider<String>.value(
-                                          value: 'add',
-                                          child: MemberDialog(),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                          SizedBox(
+                            height: 50,
+                            width: double.infinity,
+                            child: RaisedButton(
+                              shape: StadiumBorder(),
+                              child: Text('過去の記録から'),
+                              color: Colors.orange,
+                              textColor: Colors.white,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) {
+                                    return ChangeNotifierProvider<
+                                        MemberDialogModel>(
+                                      create: (_) => MemberDialogModel(),
+                                      child: Consumer<MemberDialogModel>(
+                                        builder: (context, model, child) {
+                                          //return MemberDialog();
+                                          return Provider<String>.value(
+                                            value: 'add',
+                                            child: MemberDialog(),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 5,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: RaisedButton(
-                            child: Text('新規に登録'),
-                            color: Colors.yellow.shade700,
-                            textColor: Colors.white,
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) {
-                                  return ChangeNotifierProvider<
-                                      MemberDialogModel>(
-                                    create: (_) => MemberDialogModel(),
-                                    child: Consumer<MemberDialogModel>(
-                                      builder: (context, model, child) {
-                                        //return MemberDialog();
-                                        return Provider<String>.value(
-                                          value: 'new',
-                                          child: MemberDialog(),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                          SizedBox(
+                            width: double.infinity,
+                            height: 5,
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: RaisedButton(
+                              shape: StadiumBorder(),
+                              child: Text('新規に登録'),
+                              color: Colors.yellow.shade700,
+                              textColor: Colors.white,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) {
+                                    return ChangeNotifierProvider<
+                                        MemberDialogModel>(
+                                      create: (_) => MemberDialogModel(),
+                                      child: Consumer<MemberDialogModel>(
+                                        builder: (context, model, child) {
+                                          //return MemberDialog();
+                                          return Provider<String>.value(
+                                            value: 'new',
+                                            child: MemberDialog(),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                     SizedBox(
                       height: 20,
                     ),
 
                     //メンバーの記録
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                          height: 20,
-                          width: double.infinity,
-                          child: Text(
-                            'メンバーの記録',
-                            textAlign: TextAlign.left,
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: 20,
+                            width: double.infinity,
+                            child: Text(
+                              'メンバーの記録',
+                              textAlign: TextAlign.left,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 50,
-                          width: double.infinity,
-                          child: RaisedButton(
-                            child: Text('メンバーを追加する'),
-                            color: Colors.orange,
-                            textColor: Colors.white,
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) {
-                                  return ChangeNotifierProvider<
-                                      MemberDialogModel>(
-                                    create: (_) => MemberDialogModel(),
-                                    child: Consumer<MemberDialogModel>(
-                                      builder: (context, model, child) {
-                                        //return MemberDialog();
-                                        return Provider<String>.value(
-                                          value: 'add',
-                                          child: MemberDialog(),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                          SizedBox(
+                            height: 50,
+                            width: double.infinity,
+                            child: RaisedButton(
+                              shape: StadiumBorder(),
+                              child: Text('メンバーを追加する'),
+                              color: Colors.orange,
+                              textColor: Colors.white,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) {
+                                    return ChangeNotifierProvider<
+                                        MemberDialogModel>(
+                                      create: (_) => MemberDialogModel(),
+                                      child: Consumer<MemberDialogModel>(
+                                        builder: (context, model, child) {
+                                          //return MemberDialog();
+                                          return Provider<String>.value(
+                                            value: 'add',
+                                            child: MemberDialog(),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 5,
-                        ),
-                        SizedBox(
-                          width: double.infinity,
-                          height: 50,
-                          child: RaisedButton(
-                            child: Text('新しいメンバー'),
-                            color: Colors.yellow.shade700,
-                            textColor: Colors.white,
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (_) {
-                                  return ChangeNotifierProvider<
-                                      MemberDialogModel>(
-                                    create: (_) => MemberDialogModel(),
-                                    child: Consumer<MemberDialogModel>(
-                                      builder: (context, model, child) {
-                                        //return MemberDialog();
-                                        return Provider<String>.value(
-                                          value: 'new',
-                                          child: MemberDialog(),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                              );
-                            },
+                          SizedBox(
+                            width: double.infinity,
+                            height: 5,
                           ),
-                        ),
-                      ],
-                    ),
-
-                    TextField(
-                      focusNode: model.priceFocusNode,
-                      controller: model.priceEditingController,
-                      decoration: InputDecoration(
-                        labelText: '飲食代',
+                          SizedBox(
+                            width: double.infinity,
+                            height: 50,
+                            child: RaisedButton(
+                              shape: StadiumBorder(),
+                              child: Text('新しいメンバー'),
+                              color: Colors.yellow.shade700,
+                              textColor: Colors.white,
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (_) {
+                                    return ChangeNotifierProvider<
+                                        MemberDialogModel>(
+                                      create: (_) => MemberDialogModel(),
+                                      child: Consumer<MemberDialogModel>(
+                                        builder: (context, model, child) {
+                                          //return MemberDialog();
+                                          return Provider<String>.value(
+                                            value: 'new',
+                                            child: MemberDialog(),
+                                          );
+                                        },
+                                      ),
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                    TextField(
-                      focusNode: model.memoFocusNode,
-                      controller: model.memoEditingController,
-                      decoration: InputDecoration(
-                        labelText: 'メモ',
+
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: TextField(
+                        focusNode: model.priceFocusNode,
+                        controller: model.priceEditingController,
+                        decoration: InputDecoration(
+                          labelText: '飲食代',
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: TextField(
+                        focusNode: model.memoFocusNode,
+                        controller: model.memoEditingController,
+                        decoration: InputDecoration(
+                          labelText: 'メモ',
+                        ),
                       ),
                     ),
                     RaisedButton(

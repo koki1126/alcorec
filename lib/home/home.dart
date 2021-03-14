@@ -20,6 +20,7 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text('こんにちは'),
+              backgroundColor: Colors.yellow,
             ),
 
             body: Container(
