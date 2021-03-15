@@ -20,39 +20,44 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text('こんにちは'),
+              backgroundColor: Colors.orange,
             ),
 
             body: Container(
               child: CalendarCarousel<Event>(
-                  onDayPressed: model.onDayPressed,
-                  weekendTextStyle: TextStyle(color: Colors.red),
-                  nextMonthDayBorderColor: Colors.grey.shade400,
-                  thisMonthDayBorderColor: Colors.yellow.shade700,
-                  prevMonthDayBorderColor: Colors.grey.shade400,
-                  selectedDayButtonColor: Colors.yellowAccent.shade700,
-                  weekFormat: false,
-                  height: 500,
-                  weekDayBackgroundColor: Colors.blue.shade100,
-                  selectedDateTime: model.currentDate,
-                  daysHaveCircularBorder: true,
-                  // customGridViewPhysics: NeverScrollableScrollPhysics(),
-                  markedDateShowIcon: true,
-                  markedDateIconMaxShown: 3,
-                  todayTextStyle: TextStyle(
-                    color: Colors.black,
-                  ),
-                  markedDateIconBuilder: (event) {
-                    return event.icon;
-                  },
-                  markedDateMoreShowTotal: false),
+                onDayPressed: model.onDayPressed,
+                weekendTextStyle: TextStyle(color: Colors.red),
+                nextMonthDayBorderColor: Colors.grey.shade400,
+                thisMonthDayBorderColor: Colors.yellow.shade700,
+                prevMonthDayBorderColor: Colors.grey.shade400,
+                selectedDayButtonColor: Colors.yellow.shade600,
+                weekFormat: false,
+                height: 500,
+                weekDayBackgroundColor: Colors.orange.shade300,
+                selectedDateTime: model.currentDate,
+                daysHaveCircularBorder: true,
+                // customGridViewPhysics: NeverScrollableScrollPhysics(),
+                markedDateShowIcon: true,
+                markedDateIconMaxShown: 3,
+                todayTextStyle: TextStyle(
+                  color: Colors.black,
+                ),
+                markedDateIconBuilder: (event) {
+                  return event.icon;
+                },
+                markedDateMoreShowTotal: false,
+              ),
             ),
 
             //ここまで
 
-            floatingActionButtonLocation:
-                FloatingActionButtonLocation.centerDocked,
+            // floatingActionButtonLocation:
+            //     FloatingActionButtonLocation.,
+            // FloatingActionButtonLocation.centerDocked,
+
             floatingActionButton: FloatingActionButton(
-              backgroundColor: Theme.of(context).accentColor,
+              // backgroundColor: Theme.of(context).accentColor,
+              backgroundColor: Colors.yellow.shade700,
               onPressed: () {
                 Navigator.push(
                   context,
@@ -64,39 +69,41 @@ class HomePage extends StatelessWidget {
               },
               child: Icon(Icons.add),
             ),
-            bottomNavigationBar: BottomAppBar(
-              color: Theme.of(context).primaryColor,
-              notchMargin: 6.0,
-              shape: AutomaticNotchedShape(
-                RoundedRectangleBorder(),
-                StadiumBorder(
-                  side: BorderSide(),
-                ),
-              ),
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 8.0),
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    IconButton(
-                      icon: Icon(
-                        Icons.person_outline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {},
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.info_outline,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
-              ),
-            ),
+
+            //今後の追加機能
+            // bottomNavigationBar: BottomAppBar(
+            //   color: Theme.of(context).primaryColor,
+            //   notchMargin: 6.0,
+            //   shape: AutomaticNotchedShape(
+            //     RoundedRectangleBorder(),
+            //     StadiumBorder(
+            //       side: BorderSide(),
+            //     ),
+            //   ),
+            //   child: Padding(
+            //     padding: EdgeInsets.symmetric(horizontal: 8.0),
+            //     child: Row(
+            //       mainAxisSize: MainAxisSize.max,
+            //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //       children: <Widget>[
+            //         IconButton(
+            //           icon: Icon(
+            //             Icons.person_outline,
+            //             color: Colors.white,
+            //           ),
+            //           onPressed: () {},
+            //         ),
+            //         IconButton(
+            //           icon: Icon(
+            //             Icons.info_outline,
+            //             color: Colors.white,
+            //           ),
+            //           onPressed: () {},
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // ),
           );
         },
       ),
