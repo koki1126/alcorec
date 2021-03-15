@@ -15,17 +15,26 @@ class MemberDialog extends StatelessWidget {
                   content: Container(
                     height: 300.0,
                     width: 300.0,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: model.memberCount(),
-                      itemBuilder: (BuildContext context, int index) {
-                        return CheckboxListTile(
-                          value: model.createCheckbox(index),
-                          title: Text(index.toString()),
-                          onChanged: (value) {
-                            model.tapCheckbox(index, value);
-                          },
-                        );
+                    child: FutureBuilder(
+                      future: model.registeredMember(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CheckboxListTile(
+                                value: model.createCheckbox(index),
+                                title: Text(snapshot.data[index]['name']),
+                                onChanged: (value) {
+                                  model.tapCheckbox(index, value);
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          return CircularProgressIndicator(); // データをロードできていなけれなぐるぐるを表示
+                        }
                       },
                     ),
                   ),
@@ -58,9 +67,57 @@ class MemberDialog extends StatelessWidget {
                     FlatButton(
                       child: Text("OK"),
                       onPressed: () {
-                        // todo 新規メンバーを登録
-                        print(model.newMemberController.text);
+                        model.newMemberController.text != ''
+                            ? model.memberInsert()
+                            : null; // 新規メンバーを追加
                         Navigator.pop(context);
+                      },
+                    ),
+
+                    // todo 別でデバッグ用のダイアログを作る
+                    RaisedButton(
+                      child: Text(
+                        'insert',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.insert();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'query',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.query();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'update',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.update();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'delete',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.delete();
+                      },
+                    ),
+                    RaisedButton(
+                      child: Text(
+                        'DatabaseDelete',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                      onPressed: () {
+                        model.dbHelper.databaseDelete();
                       },
                     ),
                   ],
