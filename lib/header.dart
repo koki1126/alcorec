@@ -11,14 +11,14 @@ class Header extends StatelessWidget with PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       iconTheme: IconThemeData(
-        color: Colors.lightBlue,
+        color: Colors.yellow,
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.orange,
       brightness: Brightness.light, // ステータスバー白黒反転
       title: Text(
         headerWord,
         style: TextStyle(
-          color: Colors.lightBlue,
+          color: Colors.white,
           fontSize: 20,
           fontWeight: FontWeight.bold,
         ),

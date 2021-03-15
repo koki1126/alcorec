@@ -1,6 +1,7 @@
 import 'package:alcorec/header.dart';
 import 'package:alcorec/member_dialog/member_dialog.dart';
 import 'package:alcorec/record/record_model.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:alcorec/header.dart';

@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
           return Scaffold(
             appBar: AppBar(
               title: Text('こんにちは'),
-              backgroundColor: Colors.yellow,
+              backgroundColor: Colors.orange,
             ),
 
             body: Container(
@@ -33,7 +33,7 @@ class HomePage extends StatelessWidget {
                 selectedDayButtonColor: Colors.yellow.shade600,
                 weekFormat: false,
                 height: 500,
-                weekDayBackgroundColor: Colors.blue.shade100,
+                weekDayBackgroundColor: Colors.orange.shade300,
                 selectedDateTime: model.currentDate,
                 daysHaveCircularBorder: true,
                 // customGridViewPhysics: NeverScrollableScrollPhysics(),
