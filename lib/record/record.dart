@@ -241,6 +241,76 @@ class Record extends StatelessWidget {
                         // todo 登録処理
                       },
                     ),
+                    // ! DBデバッグ用ダイアログ
+                    RaisedButton(
+                      child: Text('TestData'),
+                      color: Colors.blue,
+                      textColor: Colors.white,
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return SimpleDialog(
+                              title: Text('DBデバッグ用'),
+                              children: <Widget>[
+                                SimpleDialogOption(
+                                  onPressed: () => Navigator.pop(context),
+                                  child: Column(
+                                    children: [
+                                      RaisedButton(
+                                        child: Text(
+                                          'insert',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        onPressed: () {
+                                          model.insert();
+                                        },
+                                      ),
+                                      RaisedButton(
+                                        child: Text(
+                                          'query',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        onPressed: () {
+                                          model.query();
+                                        },
+                                      ),
+                                      RaisedButton(
+                                        child: Text(
+                                          'update',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        onPressed: () {
+                                          model.update();
+                                        },
+                                      ),
+                                      RaisedButton(
+                                        child: Text(
+                                          'delete',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        onPressed: () {
+                                          model.delete();
+                                        },
+                                      ),
+                                      RaisedButton(
+                                        child: Text(
+                                          'DatabaseDelete',
+                                          style: TextStyle(fontSize: 20),
+                                        ),
+                                        onPressed: () {
+                                          model.dbHelper.databaseDelete();
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

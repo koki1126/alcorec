@@ -73,53 +73,6 @@ class MemberDialog extends StatelessWidget {
                         Navigator.pop(context);
                       },
                     ),
-
-                    // todo 別でデバッグ用のダイアログを作る
-                    RaisedButton(
-                      child: Text(
-                        'insert',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        model.insert();
-                      },
-                    ),
-                    RaisedButton(
-                      child: Text(
-                        'query',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        model.query();
-                      },
-                    ),
-                    RaisedButton(
-                      child: Text(
-                        'update',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        model.update();
-                      },
-                    ),
-                    RaisedButton(
-                      child: Text(
-                        'delete',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        model.delete();
-                      },
-                    ),
-                    RaisedButton(
-                      child: Text(
-                        'DatabaseDelete',
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      onPressed: () {
-                        model.dbHelper.databaseDelete();
-                      },
-                    ),
                   ],
                 );
         },
