@@ -31,7 +31,6 @@ class HomeModel extends ChangeNotifier {
   //   super.notifyListeners();
   // }
 
-  //カレンダー部分　以下手写し
   DateTime currentDate = DateTime.now();
 
   void onDayPressed(DateTime date, List<Event> events) {

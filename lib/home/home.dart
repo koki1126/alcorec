@@ -39,6 +39,7 @@ class HomePage extends StatelessWidget {
                 // customGridViewPhysics: NeverScrollableScrollPhysics(),
                 markedDateShowIcon: true,
                 markedDateIconMaxShown: 3,
+                customGridViewPhysics: NeverScrollableScrollPhysics(),
                 todayTextStyle: TextStyle(
                   color: Colors.black,
                 ),
