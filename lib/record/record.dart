@@ -146,6 +146,12 @@ class Record extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
+                            Container(
+                              color: Colors.orange.shade100,
+                              height: 120,
+                              width: double.infinity,
+                              // child: ,
+                            ),
                             SizedBox(
                               height: 50,
                               width: double.infinity,
@@ -178,7 +184,7 @@ class Record extends StatelessWidget {
                             ),
                             SizedBox(
                               width: double.infinity,
-                              height: 5,
+                              height: 15,
                             ),
                             SizedBox(
                               width: double.infinity,
