@@ -20,11 +20,13 @@ class MemberDialogModel extends ChangeNotifier {
   }
 
   void selectedMember() {
+    List selectedMember = [];
     for (int i = 0; i < checkboxList.length; i++) {
       if (checkboxList[i] == true) {
-        print(i);
+        selectedMember.add(i);
       }
     }
+    print(selectedMember);
   }
 
   // database_helper.dartのDataBaseHelperをインスタンス化
