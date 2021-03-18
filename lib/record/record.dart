@@ -1,4 +1,6 @@
 import 'package:alcorec/header.dart';
+import 'package:alcorec/liquor_dialog/liquor_dialog.dart';
+import 'package:alcorec/liquor_dialog/liquor_dialog_model.dart';
 import 'package:alcorec/member_dialog/member_dialog.dart';
 import 'package:alcorec/record/record_model.dart';
 import 'package:flutter/foundation.dart';
@@ -74,14 +76,14 @@ class Record extends StatelessWidget {
                                     context: context,
                                     builder: (_) {
                                       return ChangeNotifierProvider<
-                                          MemberDialogModel>(
-                                        create: (_) => MemberDialogModel(),
-                                        child: Consumer<MemberDialogModel>(
+                                          LiquorDialogModel>(
+                                        create: (_) => LiquorDialogModel(),
+                                        child: Consumer<LiquorDialogModel>(
                                           builder: (context, model, child) {
                                             //return MemberDialog();
                                             return Provider<String>.value(
                                               value: 'add',
-                                              child: MemberDialog(),
+                                              child: LiquorDialog(),
                                             );
                                           },
                                         ),
@@ -146,6 +148,8 @@ class Record extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
+                            // todo 選択したお酒を表示する
+                            Text('選択したお酒'),
                             SizedBox(
                               height: 50,
                               width: double.infinity,

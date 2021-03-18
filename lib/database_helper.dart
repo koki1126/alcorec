@@ -7,7 +7,8 @@ class DatabaseHelper {
   // dbのバージョンを指定
   static final _databaseVersion = 1;
 
-  static final table = 'member'; // テーブル名
+  static final memberTable = 'member'; // テーブル名
+  static final liquorTable = 'liquor';
 
   // dbカラム
   static final columnId = '_id'; // 列1
@@ -41,7 +42,6 @@ class DatabaseHelper {
       onCreate: (Database db, int version) async {
         print('onCreate');
         for (int i = 1; i <= migrationScriptsLength; i++) {
-          //for (int i = 1; i <= version; i++) {
           await db.execute(migrationScripts[i]);
         }
       },
@@ -60,20 +60,20 @@ class DatabaseHelper {
   // 挿入
   Future<int> insert(Map<String, dynamic> row) async {
     Database db = await instance.database; //DBにアクセスする
-    return await db.insert(table, row); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
+    return await db.insert(memberTable, row); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
   }
 
   // 全件取得
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await instance.database; //DBにアクセスする
-    return await db.query(table); //全件取得
+    return await db.query(memberTable); //全件取得
   }
 
   // データ件数取得
   Future<int> queryRowCount() async {
     Database db = await instance.database; //DBにアクセスする
     return Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $table'));
+        await db.rawQuery('SELECT COUNT(*) FROM $memberTable'));
   }
 
   // 更新
@@ -81,13 +81,15 @@ class DatabaseHelper {
     Database db = await instance.database; //DBにアクセスする
     int id = row[columnId]; //引数のマップ型のcolumnIDを取得
     print([id]);
-    return await db.update(table, row, where: '$columnId = ?', whereArgs: [id]);
+    return await db
+        .update(memberTable, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
   // 削除
   Future<int> delete(int id) async {
     Database db = await instance.database;
-    return await db.delete(table, where: '$columnId = ?', whereArgs: [id]);
+    return await db
+        .delete(memberTable, where: '$columnId = ?', whereArgs: [id]);
   }
 
   // ! DB削除
