@@ -8,6 +8,8 @@ class RecordModel extends ChangeNotifier {
   TextEditingController priceEditingController;
   TextEditingController memoEditingController;
 
+  List selectedMember;
+
   // database_helper.dartのDataBaseHelperをインスタンス化
   final dbHelper = DatabaseHelper.instance;
 

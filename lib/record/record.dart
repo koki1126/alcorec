@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../header.dart';
 import 'liquor_dialog/liquor_dialog.dart';
-import 'liquor_dialog/liquor_dialog_model.dart';
 import 'member_dialog/member_dialog.dart';
-import 'member_dialog/member_dialog_model.dart';
 import 'record_model.dart';
 
 class Record extends StatelessWidget {
@@ -54,19 +52,7 @@ class Record extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return ChangeNotifierProvider<
-                                          LiquorDialogModel>(
-                                        create: (_) => LiquorDialogModel(),
-                                        child: Consumer<LiquorDialogModel>(
-                                          builder: (context, model, child) {
-                                            //return MemberDialog();
-                                            return Provider<String>.value(
-                                              value: 'add',
-                                              child: LiquorDialog(),
-                                            );
-                                          },
-                                        ),
-                                      );
+                                      return LiquorDialog();
                                     },
                                   );
                                 },
@@ -88,18 +74,7 @@ class Record extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return ChangeNotifierProvider<
-                                          MemberDialogModel>(
-                                        create: (_) => MemberDialogModel(),
-                                        child: Consumer<MemberDialogModel>(
-                                          builder: (context, model, child) {
-                                            return Provider<String>.value(
-                                              value: 'new',
-                                              child: MemberDialog(),
-                                            );
-                                          },
-                                        ),
-                                      );
+                                      return LiquorDialog();
                                     },
                                   );
                                 },
@@ -133,24 +108,14 @@ class Record extends StatelessWidget {
                                 child: Text('メンバーを追加する'),
                                 color: Colors.orange,
                                 textColor: Colors.white,
-                                onPressed: () {
-                                  showDialog(
+                                onPressed: () async {
+                                  model.selectedMember = await showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return ChangeNotifierProvider<
-                                          MemberDialogModel>(
-                                        create: (_) => MemberDialogModel(),
-                                        child: Consumer<MemberDialogModel>(
-                                          builder: (context, model, child) {
-                                            return Provider<String>.value(
-                                              value: 'add',
-                                              child: MemberDialog(),
-                                            );
-                                          },
-                                        ),
-                                      );
+                                      return MemberDialog();
                                     },
                                   );
+                                  print(model.selectedMember);
                                 },
                               ),
                             ),
@@ -170,19 +135,7 @@ class Record extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return ChangeNotifierProvider<
-                                          MemberDialogModel>(
-                                        create: (_) => MemberDialogModel(),
-                                        child: Consumer<MemberDialogModel>(
-                                          builder: (context, model, child) {
-                                            //return MemberDialog();
-                                            return Provider<String>.value(
-                                              value: 'new',
-                                              child: MemberDialog(),
-                                            );
-                                          },
-                                        ),
-                                      );
+                                      return NewMemberDialog();
                                     },
                                   );
                                 },
