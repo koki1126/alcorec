@@ -15,7 +15,7 @@ class MemberDialog extends StatelessWidget {
               height: 300.0,
               width: 300.0,
               child: FutureBuilder(
-                future: model.registeredMember(),
+                future: model.getRegisteredMember(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     // リストの初期化(initState)
@@ -28,7 +28,7 @@ class MemberDialog extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return CheckboxListTile(
                           value: model.createCheckbox(index),
-                          title: Text(snapshot.data[index]['name']),
+                          title: Text(snapshot.data[index]),
                           onChanged: (value) {
                             model.tapCheckbox(index, value);
                           },
@@ -50,8 +50,9 @@ class MemberDialog extends StatelessWidget {
               FlatButton(
                 child: Text("OK"),
                 onPressed: () {
-                  List selectedMemberIndex = model.createSelectedMemberList();
-                  Navigator.pop(context, selectedMemberIndex);
+                  Future<List> selectedMember =
+                      model.createSelectedMemberList();
+                  Navigator.pop(context, selectedMember);
                 },
               ),
             ],

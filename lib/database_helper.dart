@@ -57,26 +57,49 @@ class DatabaseHelper {
 
   // Helper methods
 
-  // 挿入
+  Future<List> queryAllMemberName() async {
+    Database db = await instance.database; //DBにアクセスする
+    return await db.rawQuery('SELECT name FROM $memberTable');
+  }
+
+  Future<List> querySelectedMemberName(List indexList) async {
+    Database db = await instance.database; //DBにアクセスする
+    String sql = 'SELECT name FROM $memberTable';
+
+    for (int i = 0; i < indexList.length; i++) {
+      int index = indexList[i];
+      if (i == 0) {
+        index++; // 配列のインデックス番号と_idとの差分を修正
+        sql += ' WHERE _id = $index';
+      } else {
+        index++;
+        sql += ' OR _id = $index';
+      }
+    }
+
+    return await db.rawQuery(sql);
+  }
+
+  // 挿入 テストデータ用
   Future<int> insert(Map<String, dynamic> row) async {
     Database db = await instance.database; //DBにアクセスする
     return await db.insert(memberTable, row); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
   }
 
-  // 全件取得
+  // 全件取得 テストデータ用
   Future<List<Map<String, dynamic>>> queryAllRows() async {
     Database db = await instance.database; //DBにアクセスする
     return await db.query(memberTable); //全件取得
   }
 
-  // データ件数取得
+  // データ件数取得 テストデータ用
   Future<int> queryRowCount() async {
     Database db = await instance.database; //DBにアクセスする
     return Sqflite.firstIntValue(
         await db.rawQuery('SELECT COUNT(*) FROM $memberTable'));
   }
 
-  // 更新
+  // 更新 テストデータ用
   Future<int> update(Map<String, dynamic> row) async {
     Database db = await instance.database; //DBにアクセスする
     int id = row[columnId]; //引数のマップ型のcolumnIDを取得
@@ -85,7 +108,7 @@ class DatabaseHelper {
         .update(memberTable, row, where: '$columnId = ?', whereArgs: [id]);
   }
 
-  // 削除
+  // 削除 テストデータ用
   Future<int> delete(int id) async {
     Database db = await instance.database;
     return await db
