@@ -1,3 +1,4 @@
+import 'package:alcorec/tool/debug_database/debug_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../header.dart';
@@ -114,7 +115,7 @@ class Record extends StatelessWidget {
                                   model.selectedMember = await showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return MemberDialog();
+                                      return AddToMemberDialog();
                                     },
                                   );
                                   model.displayReload();
@@ -176,75 +177,7 @@ class Record extends StatelessWidget {
                         },
                       ),
                       // ! DBデバッグ用ダイアログ
-                      RaisedButton(
-                        child: Text('TestData'),
-                        color: Colors.blue,
-                        textColor: Colors.white,
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return SimpleDialog(
-                                title: Text('DBデバッグ用'),
-                                children: <Widget>[
-                                  SimpleDialogOption(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: Column(
-                                      children: [
-                                        RaisedButton(
-                                          child: Text(
-                                            'insert',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.insert();
-                                          },
-                                        ),
-                                        RaisedButton(
-                                          child: Text(
-                                            'query',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.query();
-                                          },
-                                        ),
-                                        RaisedButton(
-                                          child: Text(
-                                            'update',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.update();
-                                          },
-                                        ),
-                                        RaisedButton(
-                                          child: Text(
-                                            'delete',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.delete();
-                                          },
-                                        ),
-                                        RaisedButton(
-                                          child: Text(
-                                            'DatabaseDelete',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.dbHelper.databaseDelete();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      ),
+                      DebugDatabase(),
                     ],
                   ),
                 ),

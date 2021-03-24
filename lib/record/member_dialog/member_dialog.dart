@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'member_dialog_model.dart';
 
-class MemberDialog extends StatelessWidget {
+class AddToMemberDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<MemberDialogModel>(
