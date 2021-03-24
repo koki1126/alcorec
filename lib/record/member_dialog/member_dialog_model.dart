@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class MemberDialogModel extends ChangeNotifier {
   List<bool> checkboxList;
   var newMemberController = TextEditingController();
+  List selectedMember;
 
   // Widgetを作成する前にbool格納用の固定長のリストを作成
   void initValue(count) {
@@ -19,14 +20,14 @@ class MemberDialogModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void selectedMember() {
+  List createSelectedMemberList() {
     List selectedMember = [];
     for (int i = 0; i < checkboxList.length; i++) {
       if (checkboxList[i] == true) {
         selectedMember.add(i);
       }
     }
-    print(selectedMember);
+    return selectedMember;
   }
 
   // database_helper.dartのDataBaseHelperをインスタンス化

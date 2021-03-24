@@ -50,8 +50,8 @@ class MemberDialog extends StatelessWidget {
               FlatButton(
                 child: Text("OK"),
                 onPressed: () {
-                  model.selectedMember();
-                  Navigator.pop(context);
+                  List selectedMemberIndex = model.createSelectedMemberList();
+                  Navigator.pop(context, selectedMemberIndex);
                 },
               ),
             ],

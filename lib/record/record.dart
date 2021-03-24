@@ -99,7 +99,9 @@ class Record extends StatelessWidget {
                               ),
                             ),
                             // todo 選択したメンバーを表示する
-                            Text('選択したメンバー'),
+                            model.selectedMember == null
+                                ? Text('選択したメンバー')
+                                : Text(model.selectedMember.toString()),
                             SizedBox(
                               height: 50,
                               width: double.infinity,
@@ -115,7 +117,7 @@ class Record extends StatelessWidget {
                                       return MemberDialog();
                                     },
                                   );
-                                  print(model.selectedMember);
+                                  model.displayReload();
                                 },
                               ),
                             ),

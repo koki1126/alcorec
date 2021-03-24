@@ -13,6 +13,11 @@ class RecordModel extends ChangeNotifier {
   // database_helper.dartのDataBaseHelperをインスタンス化
   final dbHelper = DatabaseHelper.instance;
 
+  // 画面をリロードする用:
+  void displayReload() {
+    notifyListeners();
+  }
+
   // テストデータを登録
   void insert() async {
     // テストデータ
