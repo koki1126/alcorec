@@ -1,6 +1,6 @@
 import 'package:alcorec/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:alcorec/header.dart';
+import 'package:alcorec/components/header.dart';
 import 'package:alcorec/kari.dart';
 //カレンダー関係
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
