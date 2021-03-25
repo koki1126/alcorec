@@ -10,9 +10,12 @@ class DatabaseHelper {
   static final memberTable = 'member'; // テーブル名
   static final liquorTable = 'liquor';
 
-  // dbカラム
-  static final columnId = '_id'; // 列1
-  static final columnName = 'name'; // 列2
+  // memberテーブルカラム
+  static final memberColumnId = '_id'; // 列1
+  static final memberColumnName = 'member_name'; // 列2
+  // liquorテーブルカラム
+  static final liquorColumnId = '_id'; // 列1
+  static final liquorColumnLiquorName = 'liquor_name'; // 列2
 
   // DatabaseHelperクラスをシングルトンにするためのコンストラクタ
   DatabaseHelper._privateConstructor();
@@ -59,12 +62,12 @@ class DatabaseHelper {
 
   Future<List> queryAllMemberName() async {
     Database db = await instance.database; //DBにアクセスする
-    return await db.rawQuery('SELECT name FROM $memberTable');
+    return await db.rawQuery('SELECT member_name FROM $memberTable');
   }
 
   Future<List> querySelectedMemberName(List indexList) async {
     Database db = await instance.database; //DBにアクセスする
-    String sql = 'SELECT name FROM $memberTable';
+    String sql = 'SELECT member_name FROM $memberTable';
 
     for (int i = 0; i < indexList.length; i++) {
       int index = indexList[i];
@@ -102,17 +105,17 @@ class DatabaseHelper {
   // 更新 テストデータ用
   Future<int> update(Map<String, dynamic> row) async {
     Database db = await instance.database; //DBにアクセスする
-    int id = row[columnId]; //引数のマップ型のcolumnIDを取得
+    int id = row[memberColumnId]; //引数のマップ型のcolumnIDを取得
     print([id]);
-    return await db
-        .update(memberTable, row, where: '$columnId = ?', whereArgs: [id]);
+    return await db.update(memberTable, row,
+        where: '$memberColumnId = ?', whereArgs: [id]);
   }
 
   // 削除 テストデータ用
   Future<int> delete(int id) async {
     Database db = await instance.database;
     return await db
-        .delete(memberTable, where: '$columnId = ?', whereArgs: [id]);
+        .delete(memberTable, where: '$memberColumnId = ?', whereArgs: [id]);
   }
 
   // ! DB削除

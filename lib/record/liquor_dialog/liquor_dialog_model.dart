@@ -34,7 +34,7 @@ class LiquorDialogModel extends ChangeNotifier {
 
   void liquorInsert() async {
     Map<String, dynamic> row = {
-      DatabaseHelper.columnName: newLiquorController.text,
+      DatabaseHelper.memberColumnName: newLiquorController.text,
     };
     final id = await dbHelper.insert(row);
     print('register new liquor row id: $id');

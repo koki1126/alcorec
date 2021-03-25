@@ -46,7 +46,7 @@ class MemberDialogModel extends ChangeNotifier {
         await dbHelper.querySelectedMemberName(indexList);
 
     selectedMemberName.forEach((member) {
-      nameList.add(member['name']);
+      nameList.add(member['member_name']);
     });
 
     return nameList;
@@ -54,7 +54,7 @@ class MemberDialogModel extends ChangeNotifier {
 
   void memberInsert() async {
     Map<String, dynamic> row = {
-      DatabaseHelper.columnName: newMemberController.text,
+      DatabaseHelper.memberColumnName: newMemberController.text,
     };
     final id = await dbHelper.insert(row);
     print('register new member row id: $id');
@@ -65,7 +65,7 @@ class MemberDialogModel extends ChangeNotifier {
     List registeredMember = [];
     final allRows = await dbHelper.queryAllMemberName();
     allRows.forEach((name) {
-      registeredMember.add(name['name']);
+      registeredMember.add(name['member_name']);
     });
     return registeredMember;
   }

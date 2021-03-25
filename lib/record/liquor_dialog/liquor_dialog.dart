@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'liquor_dialog_model.dart';
 
-class LiquorDialog extends StatelessWidget {
+class AddLiquorDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LiquorDialogModel>(
