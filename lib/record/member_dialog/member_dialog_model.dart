@@ -6,9 +6,8 @@ class MemberDialogModel extends ChangeNotifier {
   var newMemberController = TextEditingController();
   List selectedMemberIndexList;
 
-  // Widgetを作成する前にbool格納用の固定長のリストを作成
+  // 登録済メンバーの数だけチェックボックスを作る
   void initValue(int count, List takeOverMember) {
-    print(takeOverMember);
     if (takeOverMember.isEmpty) {
       checkboxList = List<bool>.filled(count, false);
     } else {
@@ -16,10 +15,7 @@ class MemberDialogModel extends ChangeNotifier {
     }
   }
 
-  bool createCheckbox(int index) {
-    return checkboxList[index];
-  }
-
+  // tapした時にチェックマークをつける
   void tapCheckbox(int index, bool value) {
     checkboxList[index] = value;
     notifyListeners();
