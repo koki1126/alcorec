@@ -102,7 +102,7 @@ class Record extends StatelessWidget {
                             // todo 選択したメンバーを表示する
                             model.selectedMember == null
                                 ? Text('選択したメンバー')
-                                : Text(model.selectedMember.toString()),
+                                : Text(model.selectedMember[0].toString()),
                             SizedBox(
                               height: 50,
                               width: double.infinity,
@@ -115,7 +115,13 @@ class Record extends StatelessWidget {
                                   model.selectedMember = await showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return AddToMemberDialog();
+                                      //return AddToMemberDialog();
+                                      return Provider<List>.value(
+                                        value: model.selectedMember == null
+                                            ? []
+                                            : model.selectedMember[1],
+                                        child: AddToMemberDialog(),
+                                      );
                                     },
                                   );
                                   model.displayReload();

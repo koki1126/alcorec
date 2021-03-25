@@ -20,7 +20,10 @@ class AddToMemberDialog extends StatelessWidget {
                   if (snapshot.hasData) {
                     // リストの初期化(initState)
                     model.checkboxList == null
-                        ? model.initValue(snapshot.data.length)
+                        ? model.initValue(
+                            snapshot.data.length,
+                            Provider.of<List>(context),
+                          )
                         : null;
                     return ListView.builder(
                       shrinkWrap: true,
@@ -44,8 +47,8 @@ class AddToMemberDialog extends StatelessWidget {
             actions: <Widget>[
               // ボタン領域
               FlatButton(
-                child: Text("Cancel"),
-                onPressed: () => Navigator.pop(context),
+                child: Text("Clear"),
+                onPressed: () {},
               ),
               FlatButton(
                 child: Text("OK"),

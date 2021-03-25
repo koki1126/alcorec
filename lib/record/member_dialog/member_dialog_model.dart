@@ -7,15 +7,20 @@ class MemberDialogModel extends ChangeNotifier {
   List selectedMemberIndexList;
 
   // Widgetを作成する前にbool格納用の固定長のリストを作成
-  void initValue(count) {
-    checkboxList = List<bool>.filled(count, false);
+  void initValue(int count, List takeOverMember) {
+    print(takeOverMember);
+    if (takeOverMember.isEmpty) {
+      checkboxList = List<bool>.filled(count, false);
+    } else {
+      checkboxList = takeOverMember;
+    }
   }
 
-  bool createCheckbox(index) {
+  bool createCheckbox(int index) {
     return checkboxList[index];
   }
 
-  void tapCheckbox(index, value) {
+  void tapCheckbox(int index, bool value) {
     checkboxList[index] = value;
     notifyListeners();
   }
@@ -32,7 +37,7 @@ class MemberDialogModel extends ChangeNotifier {
     }
     selectedMemberNameList =
         await getSelectedMemberName(selectedMemberIndexList);
-    return selectedMemberNameList;
+    return [selectedMemberNameList, checkboxList];
   }
 
   // ! DB関連
