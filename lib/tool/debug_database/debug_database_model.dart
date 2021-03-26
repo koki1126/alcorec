@@ -6,7 +6,7 @@ class DebugDatabaseModel extends ChangeNotifier {
   final dbHelper = DatabaseHelper.instance;
 
   // テストデータを登録
-  void insert() async {
+  void testMemberInsert() async {
     // テストデータ
     Map<String, dynamic> row = {
       DatabaseHelper.memberColumnName: 'user',
@@ -16,9 +16,9 @@ class DebugDatabaseModel extends ChangeNotifier {
   }
 
   // 全クエリを取得
-  Future<dynamic> query() async {
-    final allRows = await dbHelper.queryAllRows();
-    print('query all rows:');
+  Future<List<Map<String, dynamic>>> showAllQuery(tableName) async {
+    final allRows = await dbHelper.queryAllRows(tableName);
+    print('$tableName query all rows:');
     allRows.forEach((row) => print(row));
     return allRows;
   }
@@ -35,9 +35,9 @@ class DebugDatabaseModel extends ChangeNotifier {
   }
 
   // データを削除
-  void delete() async {
-    final id = await dbHelper.queryRowCount();
+  void delete(tableName) async {
+    final id = await dbHelper.queryRowCount(tableName);
     final rowsDeleted = await dbHelper.delete(id);
-    print('deleted $rowsDeleted row(s): row $id');
+    print('$tableName deleted $rowsDeleted row(s): row $id');
   }
 }

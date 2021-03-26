@@ -89,17 +89,17 @@ class DatabaseHelper {
     return await db.insert(memberTable, row); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
   }
 
-  // 全件取得 テストデータ用
-  Future<List<Map<String, dynamic>>> queryAllRows() async {
+  // 全件取得
+  Future<List<Map<String, dynamic>>> queryAllRows(tableName) async {
     Database db = await instance.database; //DBにアクセスする
-    return await db.query(memberTable); //全件取得
+    return await db.query(tableName); //全件取得
   }
 
   // データ件数取得 テストデータ用
-  Future<int> queryRowCount() async {
+  Future<int> queryRowCount(tableName) async {
     Database db = await instance.database; //DBにアクセスする
     return Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $memberTable'));
+        await db.rawQuery('SELECT COUNT(*) FROM $tableName'));
   }
 
   // 更新 テストデータ用

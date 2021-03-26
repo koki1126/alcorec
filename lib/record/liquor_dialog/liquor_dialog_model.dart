@@ -42,7 +42,7 @@ class LiquorDialogModel extends ChangeNotifier {
 
   // 全クエリを取得
   Future<dynamic> registeredLiquor() async {
-    final allRows = await dbHelper.queryAllRows();
+    final allRows = await dbHelper.queryAllRows('liquor');
     return allRows;
   }
 }

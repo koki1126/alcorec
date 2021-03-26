@@ -37,7 +37,7 @@ class DebugDatabase extends StatelessWidget {
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      model.insert();
+                                      model.testMemberInsert();
                                     },
                                   ),
                                   RaisedButton(
@@ -46,16 +46,7 @@ class DebugDatabase extends StatelessWidget {
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      model.query();
-                                    },
-                                  ),
-                                  RaisedButton(
-                                    child: Text(
-                                      'update',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    onPressed: () {
-                                      model.update();
+                                      model.showAllQuery('member');
                                     },
                                   ),
                                   RaisedButton(
@@ -64,7 +55,7 @@ class DebugDatabase extends StatelessWidget {
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      model.delete();
+                                      model.delete('member');
                                     },
                                   ),
                                 ],
@@ -80,29 +71,11 @@ class DebugDatabase extends StatelessWidget {
                                   Text('liquor用'),
                                   RaisedButton(
                                     child: Text(
-                                      'insert',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    onPressed: () {
-                                      model.insert();
-                                    },
-                                  ),
-                                  RaisedButton(
-                                    child: Text(
                                       'query',
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      model.query();
-                                    },
-                                  ),
-                                  RaisedButton(
-                                    child: Text(
-                                      'update',
-                                      style: TextStyle(fontSize: 20),
-                                    ),
-                                    onPressed: () {
-                                      model.update();
+                                      model.showAllQuery('liquor');
                                     },
                                   ),
                                   RaisedButton(
@@ -111,7 +84,7 @@ class DebugDatabase extends StatelessWidget {
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      model.delete();
+                                      model.delete('liquor');
                                     },
                                   ),
                                 ],
