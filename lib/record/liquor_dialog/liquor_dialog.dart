@@ -19,19 +19,13 @@ class AddLiquorDialog extends StatelessWidget {
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     // リストの初期化(initState)
-                    model.checkboxList == null
-                        ? model.initValue(snapshot.data.length)
-                        : null;
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
-                        return CheckboxListTile(
-                          value: model.createCheckbox(index),
-                          title: Text(snapshot.data[index]['name']),
-                          onChanged: (value) {
-                            model.tapCheckbox(index, value);
-                          },
+                        return ListTile(
+                          title: Text(snapshot.data[index]['liquor_name']),
+                          onTap: () {},
                         );
                       },
                     );
@@ -44,13 +38,12 @@ class AddLiquorDialog extends StatelessWidget {
             actions: <Widget>[
               // ボタン領域
               FlatButton(
-                child: Text("Cancel"),
-                onPressed: () => Navigator.pop(context),
+                child: Text("Clear"),
+                onPressed: () {},
               ),
               FlatButton(
                 child: Text("OK"),
                 onPressed: () {
-                  model.selectedLiquor();
                   Navigator.pop(context);
                 },
               ),
