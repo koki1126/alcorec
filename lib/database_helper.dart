@@ -5,7 +5,7 @@ import 'migration_scripts.dart';
 class DatabaseHelper {
   static final _databaseName = "alcorec.db"; // DB名
   // dbのバージョンを指定
-  static final _databaseVersion = 1;
+  //static final _databaseVersion = 1;
 
   static final memberTable = 'member'; // テーブル名
   static final liquorTable = 'liquor';
