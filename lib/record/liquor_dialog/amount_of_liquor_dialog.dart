@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'how_to_drink_dialog.dart';
 import 'liquor_dialog_model.dart';
 
-class AMountOfLiquorDialog extends StatelessWidget {
+class AmountOfLiquorDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LiquorDialogModel>(
@@ -20,7 +20,6 @@ class AMountOfLiquorDialog extends StatelessWidget {
                 future: model.getLiquorData('amount_of_liquor'),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    // リストの初期化(initState)
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
@@ -28,13 +27,8 @@ class AMountOfLiquorDialog extends StatelessWidget {
                         return ListTile(
                           title: Text(snapshot.data[index]['capacity']),
                           onTap: () {
-                            Navigator.pop(context);
-//                            showDialog(
-//                              context: context,
-//                              builder: (_) {
-//                                return NewMemberDialog();
-//                              },
-//                            );
+                            Navigator.pop(
+                                context, snapshot.data[index]['capacity']);
                           },
                         );
                       },
@@ -57,12 +51,6 @@ class AMountOfLiquorDialog extends StatelessWidget {
                       return HowToDrinkDialog();
                     },
                   );
-                },
-              ),
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () {
-                  Navigator.pop(context);
                 },
               ),
             ],

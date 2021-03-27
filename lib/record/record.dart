@@ -40,8 +40,10 @@ class Record extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
-                            // todo 選択したお酒を表示する
-                            Text('選択したお酒'),
+                            // 選択したお酒を表示する
+                            model.addLiquor == null
+                                ? Text('お酒を追加してね')
+                                : Text(model.addLiquor.toString()),
                             SizedBox(
                               height: 50,
                               width: double.infinity,
@@ -50,13 +52,15 @@ class Record extends StatelessWidget {
                                 child: Text('過去の記録から'),
                                 color: Colors.orange,
                                 textColor: Colors.white,
-                                onPressed: () {
-                                  showDialog(
+                                onPressed: () async {
+                                  model.addLiquor = await showDialog(
                                     context: context,
+                                    barrierColor: Colors.black.withOpacity(0),
                                     builder: (_) {
                                       return LiquorDialog();
                                     },
                                   );
+                                  model.displayReload();
                                 },
                               ),
                             ),
@@ -100,7 +104,7 @@ class Record extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
-                            // todo 選択したメンバーを表示する
+                            // 選択したメンバーを表示する
                             model.selectedMember == null
                                 ? Text('選択したメンバー')
                                 : Text(model.selectedMember[0].toString()),

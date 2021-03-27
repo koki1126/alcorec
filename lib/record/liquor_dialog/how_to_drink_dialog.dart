@@ -28,14 +28,16 @@ class HowToDrinkDialog extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           title: Text(snapshot.data[index]['way']),
-                          onTap: () {
-                            Navigator.pop(context);
-                            showDialog(
+                          onTap: () async {
+                            String result = await showDialog(
                               context: context,
+                              barrierColor: Colors.black.withOpacity(0),
                               builder: (_) {
-                                return AMountOfLiquorDialog();
+                                return AmountOfLiquorDialog();
                               },
                             );
+                            Navigator.pop(
+                                context, [snapshot.data[index]['way'], result]);
                           },
                         );
                       },
@@ -58,12 +60,6 @@ class HowToDrinkDialog extends StatelessWidget {
                       return LiquorDialog();
                     },
                   );
-                },
-              ),
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () {
-                  Navigator.pop(context);
                 },
               ),
             ],

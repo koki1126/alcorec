@@ -19,21 +19,23 @@ class LiquorDialog extends StatelessWidget {
                 future: model.getLiquorData('liquor'),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    // リストの初期化(initState)
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           title: Text(snapshot.data[index]['liquor_name']),
-                          onTap: () {
-                            Navigator.pop(context);
-                            showDialog(
+                          onTap: () async {
+                            List result = await showDialog(
                               context: context,
+                              barrierColor: Colors.black.withOpacity(0),
                               builder: (_) {
                                 return HowToDrinkDialog();
                               },
                             );
+                            result.insert(
+                                0, snapshot.data[index]['liquor_name']);
+                            Navigator.pop(context, result);
                           },
                         );
                       },
@@ -48,12 +50,6 @@ class LiquorDialog extends StatelessWidget {
               // ボタン領域
               FlatButton(
                 child: Text("Cancel"),
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-              FlatButton(
-                child: Text("OK"),
                 onPressed: () {
                   Navigator.pop(context);
                 },

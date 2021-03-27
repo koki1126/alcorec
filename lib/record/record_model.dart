@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../database_helper.dart';
 
 class RecordModel extends ChangeNotifier {
   FocusNode priceFocusNode = FocusNode();
@@ -9,6 +8,7 @@ class RecordModel extends ChangeNotifier {
   TextEditingController memoEditingController;
 
   var selectedMember;
+  List addLiquor;
 
   // 画面をリロードする用:
   void displayReload() {
