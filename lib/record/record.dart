@@ -1,11 +1,10 @@
-import 'package:alcorec/header.dart';
-import 'package:alcorec/member_dialog/member_dialog.dart';
-import 'package:alcorec/record/record_model.dart';
-import 'package:flutter/foundation.dart';
+import 'package:alcorec/tool/debug_database/debug_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:alcorec/header.dart';
-import '../member_dialog/member_dialog_model.dart';
+import '../components/header.dart';
+import 'liquor_dialog/liquor_dialog.dart';
+import 'member_dialog/member_dialog.dart';
+import 'record_model.dart';
 
 class Record extends StatelessWidget {
   @override
@@ -26,27 +25,6 @@ class Record extends StatelessWidget {
                   color: Colors.white,
                   child: Column(
                     children: [
-                      // todo 過去飲んだ酒の履歴
-                      // todo 最新順に表示する
-
-                      //履歴表示
-                      // Container(
-                      //   color: Colors.grey,
-                      //   height: 200,
-                      //   width: double.infinity,
-                      //   child: Wrap(
-                      //     spacing: 10,
-                      //     runSpacing: 10,
-                      //     children: [
-                      //       Container(
-                      //         color: Colors.green,
-                      //         height: 80,
-                      //         width: 80,
-                      //       ),
-                      //     ],
-                      //   ),
-                      // ),
-
                       //お酒の記録
                       Padding(
                         padding: const EdgeInsets.all(16.0),
@@ -61,6 +39,8 @@ class Record extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
+                            // todo 選択したお酒を表示する
+                            Text('選択したお酒'),
                             SizedBox(
                               height: 50,
                               width: double.infinity,
@@ -73,19 +53,7 @@ class Record extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return ChangeNotifierProvider<
-                                          MemberDialogModel>(
-                                        create: (_) => MemberDialogModel(),
-                                        child: Consumer<MemberDialogModel>(
-                                          builder: (context, model, child) {
-                                            //return MemberDialog();
-                                            return Provider<String>.value(
-                                              value: 'add',
-                                              child: MemberDialog(),
-                                            );
-                                          },
-                                        ),
-                                      );
+                                      return LiquorDialog();
                                     },
                                   );
                                 },
@@ -107,19 +75,7 @@ class Record extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return ChangeNotifierProvider<
-                                          MemberDialogModel>(
-                                        create: (_) => MemberDialogModel(),
-                                        child: Consumer<MemberDialogModel>(
-                                          builder: (context, model, child) {
-                                            //return MemberDialog();
-                                            return Provider<String>.value(
-                                              value: 'new',
-                                              child: MemberDialog(),
-                                            );
-                                          },
-                                        ),
-                                      );
+                                      return LiquorDialog();
                                     },
                                   );
                                 },
@@ -128,9 +84,6 @@ class Record extends StatelessWidget {
                           ],
                         ),
                       ),
-                      // SizedBox(
-                      //   height: 10,
-                      // ),
 
                       //メンバーの記録
                       Padding(
@@ -146,12 +99,10 @@ class Record extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
-                            Container(
-                              color: Colors.orange.shade100,
-                              height: 120,
-                              width: double.infinity,
-                              // child: ,
-                            ),
+                            // todo 選択したメンバーを表示する
+                            model.selectedMember == null
+                                ? Text('選択したメンバー')
+                                : Text(model.selectedMember[0].toString()),
                             SizedBox(
                               height: 50,
                               width: double.infinity,
@@ -160,25 +111,20 @@ class Record extends StatelessWidget {
                                 child: Text('メンバーを追加する'),
                                 color: Colors.orange,
                                 textColor: Colors.white,
-                                onPressed: () {
-                                  showDialog(
+                                onPressed: () async {
+                                  model.selectedMember = await showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return ChangeNotifierProvider<
-                                          MemberDialogModel>(
-                                        create: (_) => MemberDialogModel(),
-                                        child: Consumer<MemberDialogModel>(
-                                          builder: (context, model, child) {
-                                            //return MemberDialog();
-                                            return Provider<String>.value(
-                                              value: 'add',
-                                              child: MemberDialog(),
-                                            );
-                                          },
-                                        ),
+                                      //return AddToMemberDialog();
+                                      return Provider<List>.value(
+                                        value: model.selectedMember == null
+                                            ? []
+                                            : model.selectedMember[1],
+                                        child: AddToMemberDialog(),
                                       );
                                     },
                                   );
+                                  model.displayReload();
                                 },
                               ),
                             ),
@@ -198,19 +144,7 @@ class Record extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return ChangeNotifierProvider<
-                                          MemberDialogModel>(
-                                        create: (_) => MemberDialogModel(),
-                                        child: Consumer<MemberDialogModel>(
-                                          builder: (context, model, child) {
-                                            //return MemberDialog();
-                                            return Provider<String>.value(
-                                              value: 'new',
-                                              child: MemberDialog(),
-                                            );
-                                          },
-                                        ),
-                                      );
+                                      return NewMemberDialog();
                                     },
                                   );
                                 },
@@ -249,75 +183,7 @@ class Record extends StatelessWidget {
                         },
                       ),
                       // ! DBデバッグ用ダイアログ
-                      RaisedButton(
-                        child: Text('TestData'),
-                        color: Colors.blue,
-                        textColor: Colors.white,
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              return SimpleDialog(
-                                title: Text('DBデバッグ用'),
-                                children: <Widget>[
-                                  SimpleDialogOption(
-                                    onPressed: () => Navigator.pop(context),
-                                    child: Column(
-                                      children: [
-                                        RaisedButton(
-                                          child: Text(
-                                            'insert',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.insert();
-                                          },
-                                        ),
-                                        RaisedButton(
-                                          child: Text(
-                                            'query',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.query();
-                                          },
-                                        ),
-                                        RaisedButton(
-                                          child: Text(
-                                            'update',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.update();
-                                          },
-                                        ),
-                                        RaisedButton(
-                                          child: Text(
-                                            'delete',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.delete();
-                                          },
-                                        ),
-                                        RaisedButton(
-                                          child: Text(
-                                            'DatabaseDelete',
-                                            style: TextStyle(fontSize: 20),
-                                          ),
-                                          onPressed: () {
-                                            model.dbHelper.databaseDelete();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      ),
+                      DebugDatabase(),
                     ],
                   ),
                 ),
