@@ -15,7 +15,7 @@ class AddLiquorDialog extends StatelessWidget {
               height: 300.0,
               width: 300.0,
               child: FutureBuilder(
-                future: model.registeredLiquor(),
+                future: model.getLiquorData('liquor'),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     // リストの初期化(initState)
@@ -25,7 +25,15 @@ class AddLiquorDialog extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
                           title: Text(snapshot.data[index]['liquor_name']),
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pop(context);
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return AddHowToDrinkDialog();
+                              },
+                            );
+                          },
                         );
                       },
                     );
@@ -38,8 +46,148 @@ class AddLiquorDialog extends StatelessWidget {
             actions: <Widget>[
               // ボタン領域
               FlatButton(
-                child: Text("Clear"),
-                onPressed: () {},
+                child: Text("Cancel"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+              FlatButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class AddHowToDrinkDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<LiquorDialogModel>(
+      create: (_) => LiquorDialogModel(),
+      child: Consumer<LiquorDialogModel>(
+        builder: (context, model, child) {
+          return AlertDialog(
+            title: Text('飲み方を選択'),
+            content: Container(
+              height: 300.0,
+              width: 300.0,
+              child: FutureBuilder(
+                future: model.getLiquorData('how_to_drink'),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    // リストの初期化(initState)
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Text(snapshot.data[index]['way']),
+                          onTap: () {
+                            Navigator.pop(context);
+                            showDialog(
+                              context: context,
+                              builder: (_) {
+                                return AddAMountOfLiquorDialog();
+                              },
+                            );
+                          },
+                        );
+                      },
+                    );
+                  } else {
+                    return CircularProgressIndicator(); // データをロードできていなけれなぐるぐるを表示
+                  }
+                },
+              ),
+            ),
+            actions: <Widget>[
+              // ボタン領域
+              FlatButton(
+                child: Text("Back"),
+                onPressed: () {
+                  Navigator.pop(context);
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AddLiquorDialog();
+                    },
+                  );
+                },
+              ),
+              FlatButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+}
+
+class AddAMountOfLiquorDialog extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<LiquorDialogModel>(
+      create: (_) => LiquorDialogModel(),
+      child: Consumer<LiquorDialogModel>(
+        builder: (context, model, child) {
+          return AlertDialog(
+            title: Text('酒量を選択'),
+            content: Container(
+              height: 300.0,
+              width: 300.0,
+              child: FutureBuilder(
+                future: model.getLiquorData('amount_of_liquor'),
+                builder: (BuildContext context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    // リストの初期化(initState)
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return ListTile(
+                          title: Text(snapshot.data[index]['capacity']),
+                          onTap: () {
+                            Navigator.pop(context);
+//                            showDialog(
+//                              context: context,
+//                              builder: (_) {
+//                                return NewMemberDialog();
+//                              },
+//                            );
+                          },
+                        );
+                      },
+                    );
+                  } else {
+                    return CircularProgressIndicator(); // データをロードできていなけれなぐるぐるを表示
+                  }
+                },
+              ),
+            ),
+            actions: <Widget>[
+              // ボタン領域
+              FlatButton(
+                child: Text("Back"),
+                onPressed: () {
+                  Navigator.pop(context);
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return AddHowToDrinkDialog();
+                    },
+                  );
+                },
               ),
               FlatButton(
                 child: Text("OK"),

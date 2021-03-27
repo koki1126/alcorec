@@ -15,9 +15,9 @@ class LiquorDialogModel extends ChangeNotifier {
     print('register new liquor row id: $id');
   }
 
-  // 全クエリを取得
-  Future<dynamic> registeredLiquor() async {
-    final allRows = await dbHelper.queryAllRows('liquor');
+  // 酒テーブルの情報を全取得
+  Future<List<Map<String, dynamic>>> getLiquorData(tableName) async {
+    final allRows = await dbHelper.queryAllRows(tableName);
     return allRows;
   }
 }
