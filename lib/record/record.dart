@@ -53,7 +53,7 @@ class Record extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return AddLiquorDialog();
+                                      return LiquorDialog();
                                     },
                                   );
                                 },
