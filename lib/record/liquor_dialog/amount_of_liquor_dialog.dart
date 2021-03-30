@@ -27,6 +27,7 @@ class AmountOfLiquorDialog extends StatelessWidget {
                         return ListTile(
                           title: Text(snapshot.data[index]['capacity']),
                           onTap: () {
+                            // todo 途中で入力を中断した時の処理
                             Navigator.pop(
                                 context, snapshot.data[index]['capacity']);
                           },

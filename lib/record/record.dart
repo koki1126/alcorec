@@ -55,7 +55,7 @@ class Record extends StatelessWidget {
                                 onPressed: () async {
                                   model.addLiquor = await showDialog(
                                     context: context,
-                                    barrierColor: Colors.black.withOpacity(0),
+                                    barrierColor: Colors.black.withOpacity(0.5),
                                     builder: (_) {
                                       return LiquorDialog();
                                     },

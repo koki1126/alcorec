@@ -26,16 +26,18 @@ class LiquorDialog extends StatelessWidget {
                         return ListTile(
                           title: Text(snapshot.data[index]['liquor_name']),
                           onTap: () async {
-                            List result = await showDialog(
+                            model.liquorDialogResult = await showDialog(
                               context: context,
                               barrierColor: Colors.black.withOpacity(0),
                               builder: (_) {
                                 return HowToDrinkDialog();
                               },
                             );
-                            result.insert(
-                                0, snapshot.data[index]['liquor_name']);
-                            Navigator.pop(context, result);
+                            // todo 途中で入力を中断した時の処理
+                            Navigator.pop(
+                              context,
+                              model.isLiquorDialog(snapshot.data[index]),
+                            );
                           },
                         );
                       },

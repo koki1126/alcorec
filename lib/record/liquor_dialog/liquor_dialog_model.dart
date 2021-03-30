@@ -3,6 +3,31 @@ import 'package:flutter/material.dart';
 
 class LiquorDialogModel extends ChangeNotifier {
   var newLiquorController = TextEditingController();
+  List liquorDialogResult;
+  String howToDrinkDialogResult;
+  var amountOfLiquorResult;
+
+  List isLiquorDialog(data) {
+    if (liquorDialogResult != null) {
+      liquorDialogResult.insert(0, data['liquor_name']);
+    }
+    return liquorDialogResult;
+  }
+
+  List isHowToDrinkResult(data) {
+    List result = [];
+    if (howToDrinkDialogResult != null) {
+      result = [data['way'], howToDrinkDialogResult];
+    }
+    return result;
+  }
+
+  List isAmountOfLiquorResult(data) {
+    if (liquorDialogResult != null) {
+      liquorDialogResult.insert(0, data['liquor_name']);
+    }
+    return liquorDialogResult;
+  }
 
   // database_helper.dartのDataBaseHelperをインスタンス化
   final dbHelper = DatabaseHelper.instance;
