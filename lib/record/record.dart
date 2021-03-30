@@ -33,11 +33,11 @@ class Record extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             SizedBox(
-                              height: 20,
+                              height: 120,
                               width: double.infinity,
-                              child: Text(
-                                'お酒の記録',
-                                textAlign: TextAlign.left,
+                              child: const DecoratedBox(
+                                decoration:
+                                    const BoxDecoration(color: Colors.red),
                               ),
                             ),
                             // 選択したお酒を表示する
@@ -96,63 +96,51 @@ class Record extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                              height: 20,
-                              width: double.infinity,
-                              child: Text(
-                                'メンバーの記録',
-                                textAlign: TextAlign.left,
-                              ),
-                            ),
-                            // 選択したメンバーを表示する
                             model.selectedMember == null
                                 ? Text('選択したメンバー')
                                 : Text(model.selectedMember[0].toString()),
                             SizedBox(
-                              height: 50,
+                              height: 120,
                               width: double.infinity,
-                              child: RaisedButton(
-                                shape: StadiumBorder(),
-                                child: Text('メンバーを追加する'),
-                                color: Colors.orange,
-                                textColor: Colors.white,
-                                onPressed: () async {
-                                  model.selectedMember = await showDialog(
-                                    context: context,
-                                    builder: (_) {
-                                      //return AddToMemberDialog();
-                                      return Provider<List>.value(
-                                        value: model.selectedMember == null
-                                            ? []
-                                            : model.selectedMember[1],
-                                        child: AddToMemberDialog(),
-                                      );
-                                    },
-                                  );
-                                  model.displayReload();
-                                },
+                              child: const DecoratedBox(
+                                decoration:
+                                    const BoxDecoration(color: Colors.red),
                               ),
                             ),
                             SizedBox(
-                              width: double.infinity,
-                              height: 5,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: RaisedButton(
-                                shape: StadiumBorder(),
-                                child: Text('新しいメンバー'),
-                                color: Colors.yellow.shade700,
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) {
-                                      return NewMemberDialog();
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  RaisedButton(
+                                    // shape: StadiumBorder(),
+                                    child: Text('メンバーを追加'),
+                                    color: Colors.yellow.shade700,
+                                    textColor: Colors.white,
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (_) {
+                                          return LiquorDialog();
+                                        },
+                                      );
                                     },
-                                  );
-                                },
+                                  ),
+                                  RaisedButton(
+                                    // shape: StadiumBorder(),
+                                    child: Text('新しいメンバー'),
+                                    color: Colors.orange,
+                                    textColor: Colors.white,
+                                    onPressed: () {
+                                      showDialog(
+                                        context: context,
+                                        builder: (_) {
+                                          return LiquorDialog();
+                                        },
+                                      );
+                                    },
+                                  ),
+                                ],
                               ),
                             ),
                           ],
