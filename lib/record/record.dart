@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/header.dart';
 import 'liquor_dialog/liquor_dialog.dart';
+import 'liquor_dialog/new_liquor_dialog.dart';
 import 'member_dialog/member_dialog.dart';
 import 'record_model.dart';
 
@@ -39,8 +40,10 @@ class Record extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
-                            // todo 選択したお酒を表示する
-                            Text('選択したお酒'),
+                            // 選択したお酒を表示する
+                            model.addLiquor == null
+                                ? Text('お酒を追加してね')
+                                : Text(model.addLiquor.toString()),
                             SizedBox(
                               height: 50,
                               width: double.infinity,
@@ -49,13 +52,15 @@ class Record extends StatelessWidget {
                                 child: Text('過去の記録から'),
                                 color: Colors.orange,
                                 textColor: Colors.white,
-                                onPressed: () {
-                                  showDialog(
+                                onPressed: () async {
+                                  model.addLiquor = await showDialog(
                                     context: context,
+                                    barrierColor: Colors.black.withOpacity(0.5),
                                     builder: (_) {
                                       return LiquorDialog();
                                     },
                                   );
+                                  model.displayReload();
                                 },
                               ),
                             ),
@@ -75,7 +80,7 @@ class Record extends StatelessWidget {
                                   showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return LiquorDialog();
+                                      return NewLiquorDialog();
                                     },
                                   );
                                 },
@@ -99,7 +104,7 @@ class Record extends StatelessWidget {
                                 textAlign: TextAlign.left,
                               ),
                             ),
-                            // todo 選択したメンバーを表示する
+                            // 選択したメンバーを表示する
                             model.selectedMember == null
                                 ? Text('選択したメンバー')
                                 : Text(model.selectedMember[0].toString()),

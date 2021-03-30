@@ -6,19 +6,19 @@ class DebugDatabaseModel extends ChangeNotifier {
   final dbHelper = DatabaseHelper.instance;
 
   // テストデータを登録
-  void insert() async {
+  void testMemberInsert() async {
     // テストデータ
     Map<String, dynamic> row = {
-      DatabaseHelper.columnName: 'user',
+      DatabaseHelper.memberColumnName: 'user',
     };
     final id = await dbHelper.insert(row);
     print('inserted row id: $id');
   }
 
   // 全クエリを取得
-  Future<dynamic> query() async {
-    final allRows = await dbHelper.queryAllRows();
-    print('query all rows:');
+  Future<List<Map<String, dynamic>>> showAllQuery(tableName) async {
+    final allRows = await dbHelper.queryAllRows(tableName);
+    print('$tableName query all rows:');
     allRows.forEach((row) => print(row));
     return allRows;
   }
@@ -27,17 +27,17 @@ class DebugDatabaseModel extends ChangeNotifier {
   void update() async {
     // テストデータ
     Map<String, dynamic> row = {
-      DatabaseHelper.columnId: 1,
-      DatabaseHelper.columnName: 'update user',
+      DatabaseHelper.memberColumnId: 1,
+      DatabaseHelper.memberColumnName: 'update user',
     };
     final rowsAffected = await dbHelper.update(row);
     print('updated $rowsAffected row(s)');
   }
 
   // データを削除
-  void delete() async {
-    final id = await dbHelper.queryRowCount();
+  void delete(tableName) async {
+    final id = await dbHelper.queryRowCount(tableName);
     final rowsDeleted = await dbHelper.delete(id);
-    print('deleted $rowsDeleted row(s): row $id');
+    print('$tableName deleted $rowsDeleted row(s): row $id');
   }
 }

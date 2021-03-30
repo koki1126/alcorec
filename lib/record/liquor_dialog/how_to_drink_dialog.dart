@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'how_to_drink_dialog.dart';
+
+import 'amount_of_liquor_dialog.dart';
+import 'liquor_dialog.dart';
 import 'liquor_dialog_model.dart';
 
-class LiquorDialog extends StatelessWidget {
+class HowToDrinkDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<LiquorDialogModel>(
@@ -11,33 +13,38 @@ class LiquorDialog extends StatelessWidget {
       child: Consumer<LiquorDialogModel>(
         builder: (context, model, child) {
           return AlertDialog(
-            title: Text('お酒を追加'),
+            title: Text('飲み方を選択'),
             content: Container(
               height: 300.0,
               width: 300.0,
               child: FutureBuilder(
-                future: model.getLiquorData('liquor'),
+                future: model.getLiquorData('how_to_drink'),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
+                    // リストの初期化(initState)
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return ListTile(
-                          title: Text(snapshot.data[index]['liquor_name']),
+                          title: Text(snapshot.data[index]['way']),
                           onTap: () async {
-                            model.liquorDialogResult = await showDialog(
+                            model.howToDrinkDialogResult = await showDialog(
                               context: context,
                               barrierColor: Colors.black.withOpacity(0),
                               builder: (_) {
-                                return HowToDrinkDialog();
+                                return AmountOfLiquorDialog();
                               },
                             );
+
                             // todo 途中で入力を中断した時の処理
-                            Navigator.pop(
-                              context,
-                              model.isLiquorDialog(snapshot.data[index]),
-                            );
+                            Navigator.pop(context,
+                                model.isHowToDrinkResult(snapshot.data[index]));
+
+//                            Navigator.pop(context, [
+//                              snapshot.data[index]['way'],
+//                              model.howToDrinkDialogResult
+//                            ]);
                           },
                         );
                       },
@@ -51,9 +58,15 @@ class LiquorDialog extends StatelessWidget {
             actions: <Widget>[
               // ボタン領域
               FlatButton(
-                child: Text("Cancel"),
+                child: Text("Back"),
                 onPressed: () {
                   Navigator.pop(context);
+                  showDialog(
+                    context: context,
+                    builder: (_) {
+                      return LiquorDialog();
+                    },
+                  );
                 },
               ),
             ],

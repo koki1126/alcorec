@@ -30,7 +30,7 @@ class AddToMemberDialog extends StatelessWidget {
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {
                         return CheckboxListTile(
-                          value: model.createCheckbox(index),
+                          value: model.checkboxList[index],
                           title: Text(snapshot.data[index]),
                           onChanged: (value) {
                             model.tapCheckbox(index, value);
@@ -45,7 +45,7 @@ class AddToMemberDialog extends StatelessWidget {
               ),
             ),
             actions: <Widget>[
-              // ボタン領域
+              // todo chear処理
               FlatButton(
                 child: Text("Clear"),
                 onPressed: () {},

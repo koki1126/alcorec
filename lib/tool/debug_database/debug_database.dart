@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'debug_database_model.dart';
 
 class DebugDatabase extends StatelessWidget {
@@ -11,7 +10,7 @@ class DebugDatabase extends StatelessWidget {
       child: Consumer<DebugDatabaseModel>(
         builder: (context, model, child) {
           return RaisedButton(
-            child: Text('TestData'),
+            child: Text('DBtool'),
             color: Colors.blue,
             textColor: Colors.white,
             onPressed: () {
@@ -25,41 +24,71 @@ class DebugDatabase extends StatelessWidget {
                         onPressed: () => Navigator.pop(context),
                         child: Column(
                           children: [
-                            RaisedButton(
-                              child: Text(
-                                'insert',
-                                style: TextStyle(fontSize: 20),
+                            // member用
+                            Container(
+                              width: double.infinity,
+                              color: Colors.red,
+                              child: Column(
+                                children: [
+                                  Text('member用'),
+                                  RaisedButton(
+                                    child: Text(
+                                      'insert',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      model.testMemberInsert();
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    child: Text(
+                                      'query',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      model.showAllQuery('member');
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    child: Text(
+                                      'delete',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      model.delete('member');
+                                    },
+                                  ),
+                                ],
                               ),
-                              onPressed: () {
-                                model.insert();
-                              },
                             ),
-                            RaisedButton(
-                              child: Text(
-                                'query',
-                                style: TextStyle(fontSize: 20),
+
+                            // liquor用
+                            Container(
+                              color: Colors.blue,
+                              width: double.infinity,
+                              child: Column(
+                                children: [
+                                  Text('liquor用'),
+                                  RaisedButton(
+                                    child: Text(
+                                      'query',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      model.showAllQuery('liquor');
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    child: Text(
+                                      'delete',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      model.delete('liquor');
+                                    },
+                                  ),
+                                ],
                               ),
-                              onPressed: () {
-                                model.query();
-                              },
-                            ),
-                            RaisedButton(
-                              child: Text(
-                                'update',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              onPressed: () {
-                                model.update();
-                              },
-                            ),
-                            RaisedButton(
-                              child: Text(
-                                'delete',
-                                style: TextStyle(fontSize: 20),
-                              ),
-                              onPressed: () {
-                                model.delete();
-                              },
                             ),
                             RaisedButton(
                               child: Text(

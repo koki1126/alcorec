@@ -6,9 +6,8 @@ class MemberDialogModel extends ChangeNotifier {
   var newMemberController = TextEditingController();
   List selectedMemberIndexList;
 
-  // Widgetを作成する前にbool格納用の固定長のリストを作成
+  // 登録済メンバーの数だけチェックボックスを作る
   void initValue(int count, List takeOverMember) {
-    print(takeOverMember);
     if (takeOverMember.isEmpty) {
       checkboxList = List<bool>.filled(count, false);
     } else {
@@ -16,10 +15,7 @@ class MemberDialogModel extends ChangeNotifier {
     }
   }
 
-  bool createCheckbox(int index) {
-    return checkboxList[index];
-  }
-
+  // tapした時にチェックマークをつける
   void tapCheckbox(int index, bool value) {
     checkboxList[index] = value;
     notifyListeners();
@@ -50,7 +46,7 @@ class MemberDialogModel extends ChangeNotifier {
         await dbHelper.querySelectedMemberName(indexList);
 
     selectedMemberName.forEach((member) {
-      nameList.add(member['name']);
+      nameList.add(member['member_name']);
     });
 
     return nameList;
@@ -58,7 +54,7 @@ class MemberDialogModel extends ChangeNotifier {
 
   void memberInsert() async {
     Map<String, dynamic> row = {
-      DatabaseHelper.columnName: newMemberController.text,
+      DatabaseHelper.memberColumnName: newMemberController.text,
     };
     final id = await dbHelper.insert(row);
     print('register new member row id: $id');
@@ -69,7 +65,7 @@ class MemberDialogModel extends ChangeNotifier {
     List registeredMember = [];
     final allRows = await dbHelper.queryAllMemberName();
     allRows.forEach((name) {
-      registeredMember.add(name['name']);
+      registeredMember.add(name['member_name']);
     });
     return registeredMember;
   }
