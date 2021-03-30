@@ -31,16 +31,6 @@ class Record extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // SizedBox(
-                            //   height: 20,
-                            //   width: double.infinity,
-                            //   child: Text(
-                            //     'お酒の記録',
-                            //     textAlign: TextAlign.left,
-                            //   ),
-                            // ),
-                            // todo 選択したお酒を表示する
-                            // Text('選択したお酒'),
                             SizedBox(
                               height: 120,
                               width: double.infinity,
@@ -85,46 +75,6 @@ class Record extends StatelessWidget {
                                 ],
                               ),
                             ),
-                            // SizedBox(
-                            //   height: 50,
-                            //   width: double.infinity,
-                            // child: RaisedButton(
-                            //   shape: StadiumBorder(),
-                            //   child: Text('過去の記録から'),
-                            //   color: Colors.orange,
-                            //   textColor: Colors.white,
-                            //   onPressed: () {
-                            //     showDialog(
-                            //       context: context,
-                            //       builder: (_) {
-                            //         return LiquorDialog();
-                            //       },
-                            //     );
-                            //   },
-                            // ),
-                            // ),
-                            // SizedBox(
-                            //   width: double.infinity,
-                            //   height: 5,
-                            // ),
-                            // SizedBox(
-                            //   width: double.infinity,
-                            //   height: 50,
-                            // child: RaisedButton(
-                            //   shape: StadiumBorder(),
-                            //   child: Text('新規に登録'),
-                            //   color: Colors.yellow.shade700,
-                            //   textColor: Colors.white,
-                            //   onPressed: () {
-                            //     showDialog(
-                            //       context: context,
-                            //       builder: (_) {
-                            //         return LiquorDialog();
-                            //       },
-                            //     );
-                            //   },
-                            // ),
-                            // ),
                           ],
                         ),
                       ),
@@ -135,15 +85,6 @@ class Record extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            // SizedBox(
-                            //   height: 20,
-                            //   width: double.infinity,
-                            //   child: Text(
-                            //     'メンバーの記録',
-                            //     textAlign: TextAlign.left,
-                            //   ),
-                            // ),
-                            // todo 選択したメンバーを表示する
                             model.selectedMember == null
                                 ? Text('選択したメンバー')
                                 : Text(model.selectedMember[0].toString()),
@@ -191,54 +132,6 @@ class Record extends StatelessWidget {
                                 ],
                               ),
                             ),
-
-                            // SizedBox(
-                            //   height: 50,
-                            //   width: double.infinity,
-                            //   child: RaisedButton(
-                            //     shape: StadiumBorder(),
-                            //     child: Text('メンバーを追加する'),
-                            //     color: Colors.orange,
-                            //     textColor: Colors.white,
-                            //     onPressed: () async {
-                            //       model.selectedMember = await showDialog(
-                            //         context: context,
-                            //         builder: (_) {
-                            //           //return AddToMemberDialog();
-                            //           return Provider<List>.value(
-                            //             value: model.selectedMember == null
-                            //                 ? []
-                            //                 : model.selectedMember[1],
-                            //             child: AddToMemberDialog(),
-                            //           );
-                            //         },
-                            //       );
-                            //       model.displayReload();
-                            //     },
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   width: double.infinity,
-                            //   height: 15,
-                            // ),
-                            // SizedBox(
-                            //   width: double.infinity,
-                            //   height: 50,
-                            //   child: RaisedButton(
-                            //     shape: StadiumBorder(),
-                            //     child: Text('新しいメンバー'),
-                            //     color: Colors.yellow.shade700,
-                            //     textColor: Colors.white,
-                            //     onPressed: () {
-                            //       showDialog(
-                            //         context: context,
-                            //         builder: (_) {
-                            //           return NewMemberDialog();
-                            //         },
-                            //       );
-                            //     },
-                            //   ),
-                            // ),
                           ],
                         ),
                       ),
