@@ -17,7 +17,7 @@ class AmountOfLiquorDialog extends StatelessWidget {
               height: 300.0,
               width: 300.0,
               child: FutureBuilder(
-                future: model.getLiquorData('amount_of_liquor'),
+                future: model.getLiquorData('amount'),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(

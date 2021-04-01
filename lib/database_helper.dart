@@ -73,10 +73,10 @@ class DatabaseHelper {
       int index = indexList[i];
       if (i == 0) {
         index++; // 配列のインデックス番号と_idとの差分を修正
-        sql += ' WHERE _id = $index';
+        sql += ' WHERE member_id = $index';
       } else {
         index++;
-        sql += ' OR _id = $index';
+        sql += ' OR member_id = $index';
       }
     }
 

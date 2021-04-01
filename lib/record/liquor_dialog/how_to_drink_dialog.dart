@@ -18,7 +18,7 @@ class HowToDrinkDialog extends StatelessWidget {
               height: 300.0,
               width: 300.0,
               child: FutureBuilder(
-                future: model.getLiquorData('how_to_drink'),
+                future: model.getLiquorData('how'),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
                     // リストの初期化(initState)
