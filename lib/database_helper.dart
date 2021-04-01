@@ -11,10 +11,10 @@ class DatabaseHelper {
   static final liquorTable = 'liquor';
 
   // memberテーブルカラム
-  static final memberColumnId = '_id'; // 列1
+  static final memberColumnId = 'member_id'; // 列1
   static final memberColumnName = 'member_name'; // 列2
   // liquorテーブルカラム
-  static final liquorColumnId = '_id'; // 列1
+  static final liquorColumnId = 'liquor_id'; // 列1
   static final liquorColumnLiquorName = 'liquor_name'; // 列2
 
   // DatabaseHelperクラスをシングルトンにするためのコンストラクタ

@@ -1,32 +1,47 @@
 Map<int, String> migrationScripts = {
   1: '''
-          CREATE TABLE member (
-            _id INTEGER PRIMARY KEY,
-            member_name TEXT NOT NULL
+          CREATE TABLE order_liquor (
+            order_liquor_id INTEGER PRIMARY KEY,
+            drinking_id INTEGER NOT NULL,
+            liquor_id INTEGER NOT NULL,  
+            how_id INTEGER NOT NULL,
+            amount_id INTEGER NOT NULL,
+            count INTEGER NOT NULL
           )
       ''',
   2: '''
-          CREATE TABLE liquor (
-            _id INTEGER PRIMARY KEY,
-            liquor_name TEXT NOT NULL
+          CREATE TABLE drinking (
+            drinking_id INTEGER PRIMARY KEY,
+            memo TEXT NOT NULL,
+            created_at DATE DEFAULT (datetime('now','localtime'))
           )
       ''',
   3: '''
-          CREATE TABLE how_to_drink (
-            _id INTEGER PRIMARY KEY,
-            way TEXT NOT NULL,
-            liquor_id INTEGER
+          CREATE TABLE member (
+            member_id INTEGER PRIMARY KEY,
+            member_name TEXT NOT NULL
           )
       ''',
   4: '''
-          CREATE TABLE amount_of_liquor (
-            _id INTEGER PRIMARY KEY,
-            capacity TEXT NOT NULL,
-            liquor_id INTEGER
+          CREATE TABLE liquor (
+            liquor_id INTEGER PRIMARY KEY,
+            liquor_name TEXT NOT NULL
           )
       ''',
   5: '''
-          INSERT INTO liquor (_id, liquor_name) VALUES
+          CREATE TABLE how (
+            how_id INTEGER PRIMARY KEY,
+            way TEXT NOT NULL
+          )
+      ''',
+  6: '''
+          CREATE TABLE amount (
+            amount_id INTEGER PRIMARY KEY,
+            capacity TEXT NOT NULL
+          )
+      ''',
+  7: '''
+          INSERT INTO liquor (liquor_id, liquor_name) VALUES
           (1, 'ビール'),
           (2, 'ウィスキー'),
           (3, 'サワー'),
@@ -36,8 +51,8 @@ Map<int, String> migrationScripts = {
           (7, 'カクテル'),
           (8, '梅酒')
       ''',
-  6: '''
-          INSERT INTO how_to_drink (_id, way) VALUES
+  8: '''
+          INSERT INTO how (how_id, way) VALUES
           (1, 'ストレート'),
           (2, 'ロック'),
           (3, 'ハイボール'),
@@ -50,8 +65,8 @@ Map<int, String> migrationScripts = {
           (10, 'ジントニック'),
           (11, 'ソーダ割り')
       ''',
-  7: '''
-          INSERT INTO amount_of_liquor (_id, capacity) VALUES
+  9: '''
+          INSERT INTO amount (amount_id, capacity) VALUES
           (1, '350ml'),
           (2, '500ml'),
           (3, '中ジョッキ'),
