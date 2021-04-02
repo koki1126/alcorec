@@ -26,7 +26,7 @@ class LiquorDialog extends StatelessWidget {
                         return ListTile(
                           title: Text(snapshot.data[index]['liquor_name']),
                           onTap: () async {
-                            model.liquorDialogResult = await showDialog(
+                            model.wayAmountResult = await showDialog(
                               context: context,
                               barrierColor: Colors.black.withOpacity(0),
                               builder: (_) {
@@ -36,7 +36,8 @@ class LiquorDialog extends StatelessWidget {
                             // todo 途中で入力を中断した時の処理
                             Navigator.pop(
                               context,
-                              model.isLiquorDialog(snapshot.data[index]),
+                              model.isWayAmountResult(
+                                  snapshot.data[index]['liquor_id']),
                             );
                           },
                         );

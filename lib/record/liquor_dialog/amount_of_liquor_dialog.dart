@@ -28,8 +28,9 @@ class AmountOfLiquorDialog extends StatelessWidget {
                           title: Text(snapshot.data[index]['capacity']),
                           onTap: () {
                             // todo 途中で入力を中断した時の処理
+                            // 酒量のkeyを返却
                             Navigator.pop(
-                                context, snapshot.data[index]['capacity']);
+                                context, snapshot.data[index]['amount_id']);
                           },
                         );
                       },

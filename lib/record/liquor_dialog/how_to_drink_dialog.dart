@@ -29,7 +29,7 @@ class HowToDrinkDialog extends StatelessWidget {
                         return ListTile(
                           title: Text(snapshot.data[index]['way']),
                           onTap: () async {
-                            model.howToDrinkDialogResult = await showDialog(
+                            model.capacityResult = await showDialog(
                               context: context,
                               barrierColor: Colors.black.withOpacity(0),
                               builder: (_) {
@@ -38,12 +38,14 @@ class HowToDrinkDialog extends StatelessWidget {
                             );
 
                             // todo 途中で入力を中断した時の処理
-                            Navigator.pop(context,
-                                model.isHowToDrinkResult(snapshot.data[index]));
+                            Navigator.pop(
+                                context,
+                                model.iscapacityResult(
+                                    snapshot.data[index]['how_id']));
 
 //                            Navigator.pop(context, [
 //                              snapshot.data[index]['way'],
-//                              model.howToDrinkDialogResult
+//                              model.capacityResult
 //                            ]);
                           },
                         );

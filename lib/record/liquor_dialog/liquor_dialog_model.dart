@@ -3,30 +3,24 @@ import 'package:flutter/material.dart';
 
 class LiquorDialogModel extends ChangeNotifier {
   var newLiquorController = TextEditingController();
-  List liquorDialogResult;
-  String howToDrinkDialogResult;
-  var amountOfLiquorResult;
+  List wayAmountResult;
+  var capacityResult;
 
-  List isLiquorDialog(data) {
-    if (liquorDialogResult != null) {
-      liquorDialogResult.insert(0, data['liquor_name']);
+  // お酒、飲み方、酒量を格納して返却する
+  List isWayAmountResult(liquorId) {
+    if (wayAmountResult != null) {
+      wayAmountResult.insert(0, liquorId);
     }
-    return liquorDialogResult;
+    return wayAmountResult;
   }
 
-  List isHowToDrinkResult(data) {
+  // 飲み方、酒量を格納して返却する
+  List iscapacityResult(howId) {
     List result = [];
-    if (howToDrinkDialogResult != null) {
-      result = [data['way'], howToDrinkDialogResult];
+    if (capacityResult != null) {
+      result = [howId, capacityResult];
     }
     return result;
-  }
-
-  List isAmountOfLiquorResult(data) {
-    if (liquorDialogResult != null) {
-      liquorDialogResult.insert(0, data['liquor_name']);
-    }
-    return liquorDialogResult;
   }
 
   // database_helper.dartのDataBaseHelperをインスタンス化

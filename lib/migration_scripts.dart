@@ -1,7 +1,7 @@
 Map<int, String> migrationScripts = {
   1: '''
           CREATE TABLE order_liquor (
-            order_liquor_id INTEGER PRIMARY KEY,
+            order_liquor_id INTEGER PRIMARY KEY AUTOINCREMENT,
             drinking_id INTEGER NOT NULL,
             liquor_id INTEGER NOT NULL,  
             how_id INTEGER NOT NULL,
@@ -11,32 +11,32 @@ Map<int, String> migrationScripts = {
       ''',
   2: '''
           CREATE TABLE drinking (
-            drinking_id INTEGER PRIMARY KEY,
+            drinking_id INTEGER PRIMARY KEY AUTOINCREMENT,
             memo TEXT NOT NULL,
             created_at DATE DEFAULT (datetime('now','localtime'))
           )
       ''',
   3: '''
           CREATE TABLE member (
-            member_id INTEGER PRIMARY KEY,
+            member_id INTEGER PRIMARY KEY AUTOINCREMENT,
             member_name TEXT NOT NULL
           )
       ''',
   4: '''
           CREATE TABLE liquor (
-            liquor_id INTEGER PRIMARY KEY,
+            liquor_id INTEGER PRIMARY KEY AUTOINCREMENT,
             liquor_name TEXT NOT NULL
           )
       ''',
   5: '''
           CREATE TABLE how (
-            how_id INTEGER PRIMARY KEY,
+            how_id INTEGER PRIMARY KEY AUTOINCREMENT,
             way TEXT NOT NULL
           )
       ''',
   6: '''
           CREATE TABLE amount (
-            amount_id INTEGER PRIMARY KEY,
+            amount_id INTEGER PRIMARY KEY AUTOINCREMENT,
             capacity TEXT NOT NULL
           )
       ''',

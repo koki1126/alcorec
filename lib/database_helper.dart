@@ -9,6 +9,7 @@ class DatabaseHelper {
 
   static final memberTable = 'member'; // テーブル名
   static final liquorTable = 'liquor';
+  static final orderLiquorTable = 'order_liquor';
 
   // memberテーブルカラム
   static final memberColumnId = 'member_id'; // 列1
@@ -59,6 +60,28 @@ class DatabaseHelper {
   }
 
   // Helper methods
+
+  // 投稿を登録
+  Future<int> insertPost(List addLiquor, List selectedMember) async {
+    Database db = await instance.database; //DBにアクセスする
+    //await db.insert(
+    //orderLiquorTable, rowList); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
+
+    addLiquor.forEach((order) async {
+      await db.rawQuery('''
+          INSERT INTO $orderLiquorTable (drinking_id, liquor_id, how_id, amount_id, count) VALUES
+          (1, '350ml'),
+          (2, '500ml'),
+          (3, '中ジョッキ'),
+          (4, '大ジョッキ'),
+          (5, 'おちょこ'),
+          (6, '1合'),
+          (7, 'グラス')
+        ''');
+    });
+
+    return 1;
+  }
 
   Future<List> queryAllMemberName() async {
     Database db = await instance.database; //DBにアクセスする
