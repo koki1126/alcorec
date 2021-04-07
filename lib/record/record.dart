@@ -26,7 +26,7 @@ class Record extends StatelessWidget {
                   color: Colors.white,
                   child: Column(
                     children: [
-                      //お酒の記録
+                      // ! お酒の記録
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -90,7 +90,7 @@ class Record extends StatelessWidget {
                         ),
                       ),
 
-                      //メンバーの記録
+                      // ! メンバーの記録
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(

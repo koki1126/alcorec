@@ -18,10 +18,9 @@ class AddToMemberDialog extends StatelessWidget {
                 future: model.getRegisteredMember(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (snapshot.hasData) {
-                    // リストの初期化(initState)
                     model.checkboxList == null
                         ? model.initValue(
-                            snapshot.data.length,
+                            snapshot.data,
                             Provider.of<List>(context),
                           )
                         : null;
@@ -31,7 +30,7 @@ class AddToMemberDialog extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return CheckboxListTile(
                           value: model.checkboxList[index],
-                          title: Text(snapshot.data[index]),
+                          title: Text(snapshot.data[index]['member_name']),
                           onChanged: (value) {
                             model.tapCheckbox(index, value);
                           },

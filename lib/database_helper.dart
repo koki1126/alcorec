@@ -85,7 +85,7 @@ class DatabaseHelper {
 
   Future<List> queryAllMemberName() async {
     Database db = await instance.database; //DBにアクセスする
-    return await db.rawQuery('SELECT member_name FROM $memberTable');
+    return await db.rawQuery('SELECT * FROM $memberTable');
   }
 
   Future<List> querySelectedMemberName(List indexList) async {
