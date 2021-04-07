@@ -5,8 +5,8 @@ class RecordModel extends ChangeNotifier {
   FocusNode priceFocusNode = FocusNode();
   FocusNode memoFocusNode = FocusNode();
 
-  TextEditingController priceEditingController;
-  TextEditingController memoEditingController;
+  TextEditingController priceEditingController = TextEditingController();
+  TextEditingController memoEditingController = TextEditingController();
 
   var selectedMember;
   List<int> addLiquor;
@@ -16,9 +16,14 @@ class RecordModel extends ChangeNotifier {
   final dbHelper = DatabaseHelper.instance;
 
   Future<void> registerPost() async {
-    print(addLiquor);
-    print(selectedMember[0]);
-    final id = await dbHelper.insertPost(addLiquor, selectedMember[0]);
+    // 登録内容
+    Map<String, dynamic> post = {
+      'liquor': addLiquorList,
+      'member': selectedMember[0],
+      'price': priceEditingController.text,
+      'memo': memoEditingController.text
+    };
+    final id = await dbHelper.insertPost(post);
     print(id);
   }
 

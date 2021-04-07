@@ -186,8 +186,6 @@ class Record extends StatelessWidget {
                         textColor: Colors.white,
                         onPressed: () {
                           // todo 登録処理
-                          //print(model.addLiquor);
-                          //print(model.selectedMember[0]);
                           model.registerPost();
                         },
                       ),

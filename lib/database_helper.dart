@@ -62,12 +62,12 @@ class DatabaseHelper {
   // Helper methods
 
   // 投稿を登録
-  Future<int> insertPost(List addLiquor, List selectedMember) async {
+  Future<int> insertPost(Map<String, dynamic> post) async {
     Database db = await instance.database; //DBにアクセスする
     //await db.insert(
     //orderLiquorTable, rowList); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
 
-    addLiquor.forEach((order) async {
+    post['liquor'].forEach((liquor) async {
       await db.rawQuery('''
           INSERT INTO $orderLiquorTable (drinking_id, liquor_id, how_id, amount_id, count) VALUES
           (1, '350ml'),
