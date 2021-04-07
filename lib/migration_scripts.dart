@@ -13,6 +13,7 @@ Map<int, String> migrationScripts = {
           CREATE TABLE drinking (
             drinking_id INTEGER PRIMARY KEY AUTOINCREMENT,
             memo TEXT NOT NULL,
+            price INTEGER NOT NULL,
             created_at DATE DEFAULT (datetime('now','localtime'))
           )
       ''',

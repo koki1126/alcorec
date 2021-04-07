@@ -28,6 +28,7 @@
 | ----------- | -------- | -------------------- |
 | drinking_id | INT      | NOT NULL<br>PK<br>AI |
 | memo        | TEXT     | NOT NULL             |
+| price       | INT      | NOT NULL             |
 | created_at  | TEXT     | NOT NULL             |
 
 <br>
