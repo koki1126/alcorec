@@ -11,11 +11,11 @@
 | カラム名        | データ型 | 属性                  |
 | --------------- | -------- | --------------------- |
 | order_liquor_id | INT      | NOT NULL<br>PK <br>AI |
-| drinking_id     | INT      | NOT NULL              |
-| liquor_id       | INT      | NOT NULL              |
-| how_id          | INT      | NOT NULL              |
-| amount_id       | INT      | NOT NULL              |
-| count           | INT      | NOT NULL              |
+| drinking_id     | INT      | NOT NULL<br>FK        |
+| liquor_id       | INT      | NOT NULL<br>FK        |
+| how_id          | INT      | NOT NULL<br>FK        |
+| amount_id       | INT      | NOT NULL<br>FK        |
+| order_count     | INT      | NOT NULL              |
 
 <br>
 <br>
@@ -29,7 +29,7 @@
 | drinking_id | INT      | NOT NULL<br>PK<br>AI |
 | memo        | TEXT     | NOT NULL             |
 | price       | INT      | NOT NULL             |
-| created_at  | TEXT     | NOT NULL             |
+| event_date  | DATE     | NOT NULL             |
 
 <br>
 <br>
@@ -42,6 +42,19 @@
 | ----------- | -------- | -------------------- |
 | member_id   | INT      | NOT NULL<br>PK<br>AI |
 | member_name | TEXT     | NOT NULL             |
+
+<br>
+<br>
+
+### 中間テーブル(drinking_member)
+
+- トランザクションデータ
+
+| カラム名           | データ型 | 属性                 |
+| ------------------ | -------- | -------------------- |
+| drinking_member_id | INT      | NOT NULL<br>PK<br>AI |
+| drinking_id        | INT      | NOT NULL             |
+| member_id          | INT      | NOT NULL             |
 
 <br>
 <br>

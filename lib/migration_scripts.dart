@@ -6,7 +6,7 @@ Map<int, String> migrationScripts = {
             liquor_id INTEGER NOT NULL,  
             how_id INTEGER NOT NULL,
             amount_id INTEGER NOT NULL,
-            count INTEGER NOT NULL
+            order_count INTEGER NOT NULL
           )
       ''',
   2: '''
@@ -14,7 +14,7 @@ Map<int, String> migrationScripts = {
             drinking_id INTEGER PRIMARY KEY AUTOINCREMENT,
             memo TEXT NOT NULL,
             price INTEGER NOT NULL,
-            created_at DATE DEFAULT (datetime('now','localtime'))
+            event_date DATE DEFAULT (datetime('now','localtime'))
           )
       ''',
   3: '''
@@ -42,6 +42,13 @@ Map<int, String> migrationScripts = {
           )
       ''',
   7: '''
+          CREATE TABLE drinking_member (
+            drinking_member_id PRIMARY KEY AUTOINCREMENT,
+            drinking_id INTEGER NOT NULL,
+            member_id INTEGER NOT NULL
+          )
+      ''',
+  8: '''
           INSERT INTO liquor (liquor_id, liquor_name) VALUES
           (1, 'ビール'),
           (2, 'ウィスキー'),
@@ -52,7 +59,7 @@ Map<int, String> migrationScripts = {
           (7, 'カクテル'),
           (8, '梅酒')
       ''',
-  8: '''
+  9: '''
           INSERT INTO how (how_id, way) VALUES
           (1, 'ストレート'),
           (2, 'ロック'),
@@ -66,7 +73,7 @@ Map<int, String> migrationScripts = {
           (10, 'ジントニック'),
           (11, 'ソーダ割り')
       ''',
-  9: '''
+  10: '''
           INSERT INTO amount (amount_id, capacity) VALUES
           (1, '350ml'),
           (2, '500ml'),
