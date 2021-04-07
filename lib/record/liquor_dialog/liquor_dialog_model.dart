@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 
 class LiquorDialogModel extends ChangeNotifier {
   var newLiquorController = TextEditingController();
-  List wayAmountResult;
-  var capacityResult;
+  List<int> wayAmountResult;
+  int capacityResult;
 
   // お酒、飲み方、酒量を格納して返却する
   List isWayAmountResult(liquorId) {
@@ -15,8 +15,8 @@ class LiquorDialogModel extends ChangeNotifier {
   }
 
   // 飲み方、酒量を格納して返却する
-  List iscapacityResult(howId) {
-    List result = [];
+  List isCapacityResult(howId) {
+    List<int> result = [];
     if (capacityResult != null) {
       result = [howId, capacityResult];
     }

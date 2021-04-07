@@ -40,7 +40,7 @@ class HowToDrinkDialog extends StatelessWidget {
                             // todo 途中で入力を中断した時の処理
                             Navigator.pop(
                                 context,
-                                model.iscapacityResult(
+                                model.isCapacityResult(
                                     snapshot.data[index]['how_id']));
 
 //                            Navigator.pop(context, [

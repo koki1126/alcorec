@@ -43,7 +43,7 @@ class Record extends StatelessWidget {
                             // 選択したお酒を表示する
                             model.addLiquor == null
                                 ? Text('お酒を追加してね')
-                                : Text(model.addLiquor.toString()),
+                                : Text(model.addLiquorList.toString()),
                             SizedBox(
                               height: 50,
                               width: double.infinity,
@@ -60,7 +60,8 @@ class Record extends StatelessWidget {
                                       return LiquorDialog();
                                     },
                                   );
-                                  model.displayReload();
+                                  //print(model.addLiquor);
+                                  model.createAddLiquorList();
                                 },
                               ),
                             ),
@@ -185,9 +186,9 @@ class Record extends StatelessWidget {
                         textColor: Colors.white,
                         onPressed: () {
                           // todo 登録処理
-                          print(model.addLiquor);
-                          print(model.selectedMember[0]);
-                          //model.registerPost();
+                          //print(model.addLiquor);
+                          //print(model.selectedMember[0]);
+                          model.registerPost();
                         },
                       ),
                       // ! DBデバッグ用ダイアログ

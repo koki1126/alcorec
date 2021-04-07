@@ -9,7 +9,8 @@ class RecordModel extends ChangeNotifier {
   TextEditingController memoEditingController;
 
   var selectedMember;
-  List addLiquor;
+  List<int> addLiquor;
+  List<List<int>> addLiquorList = [];
 
   // database_helper.dartのDataBaseHelperをインスタンス化
   final dbHelper = DatabaseHelper.instance;
@@ -21,7 +22,14 @@ class RecordModel extends ChangeNotifier {
     print(id);
   }
 
-  // 画面をリロードする用:
+  // ダイアログで選択したお酒をリストに追加
+  void createAddLiquorList() {
+    addLiquorList.add(addLiquor);
+    notifyListeners();
+    addLiquor = [];
+  }
+
+  // 画面を再描画する用メソッド
   void displayReload() {
     notifyListeners();
   }

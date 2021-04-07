@@ -1,8 +1,10 @@
 ## テーブル構造(仮)
 
 <br>
+<br>
+<br>
 
-### 注文したお酒テーブル(orderliquor)
+### 注文したお酒テーブル(order_liquor)
 
 - トランザクションデータ
 
@@ -16,8 +18,11 @@
 | count           | INT      | NOT NULL              |
 
 <br>
+<br>
 
 ### 飲み会テーブル(drinking)
+
+- マスタデータ
 
 | カラム名    | データ型 | 属性                 |
 | ----------- | -------- | -------------------- |
@@ -25,6 +30,7 @@
 | memo        | TEXT     | NOT NULL             |
 | created_at  | TEXT     | NOT NULL             |
 
+<br>
 <br>
 
 ### メンバーテーブル(member)
@@ -37,6 +43,7 @@
 | member_name | TEXT     | NOT NULL             |
 
 <br>
+<br>
 
 ### お酒種類テーブル(liquor)
 
@@ -47,6 +54,7 @@
 | liquor_id   | INT      | NOT NULL<br>PK<br>AI |
 | liquor_name | TEXT     | NOT NULL             |
 
+<br>
 <br>
 
 ### 飲み方テーブル(how)
@@ -59,6 +67,7 @@
 | way      | TEXT     | NOT NULL             |
 
 <br>
+<br>
 
 ### 酒量テーブル(amount)
 
@@ -69,4 +78,5 @@
 | amount_id | INT      | NOT NULL<br>PK <br>AI |
 | capacity  | TEXT     | NOT NULL              |
 
+<br>
 <br>
