@@ -9,7 +9,7 @@ class DebugDatabaseModel extends ChangeNotifier {
   void testMemberInsert() async {
     // テストデータ
     Map<String, dynamic> row = {
-      DatabaseHelper.memberColumnName: 'user',
+      'member_name': 'user',
     };
     final id = await dbHelper.insert(row);
     print('inserted row id: $id');
@@ -27,8 +27,8 @@ class DebugDatabaseModel extends ChangeNotifier {
   void update() async {
     // テストデータ
     Map<String, dynamic> row = {
-      DatabaseHelper.memberColumnId: 1,
-      DatabaseHelper.memberColumnName: 'update user',
+      'member_id': 1,
+      'member_name': 'update user',
     };
     final rowsAffected = await dbHelper.update(row);
     print('updated $rowsAffected row(s)');

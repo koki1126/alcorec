@@ -43,7 +43,7 @@ Map<int, String> migrationScripts = {
       ''',
   7: '''
           CREATE TABLE drinking_member (
-            drinking_member_id PRIMARY KEY AUTOINCREMENT,
+            drinking_member_id INTEGER PRIMARY KEY AUTOINCREMENT,
             drinking_id INTEGER NOT NULL,
             member_id INTEGER NOT NULL
           )
@@ -82,5 +82,5 @@ Map<int, String> migrationScripts = {
           (5, 'おちょこ'),
           (6, '1合'),
           (7, 'グラス')
-      ''',
+      '''
 };

@@ -4,19 +4,6 @@ import 'migration_scripts.dart';
 
 class DatabaseHelper {
   static final _databaseName = "alcorec.db"; // DB名
-  // dbのバージョンを指定
-  //static final _databaseVersion = 1;
-
-  static final memberTable = 'member'; // テーブル名
-  static final liquorTable = 'liquor';
-  static final orderLiquorTable = 'order_liquor';
-
-  // memberテーブルカラム
-  static final memberColumnId = 'member_id'; // 列1
-  static final memberColumnName = 'member_name'; // 列2
-  // liquorテーブルカラム
-  static final liquorColumnId = 'liquor_id'; // 列1
-  static final liquorColumnLiquorName = 'liquor_name'; // 列2
 
   // DatabaseHelperクラスをシングルトンにするためのコンストラクタ
   DatabaseHelper._privateConstructor();
@@ -69,7 +56,7 @@ class DatabaseHelper {
 
     post['liquor'].forEach((liquor) async {
       await db.rawQuery('''
-          INSERT INTO $orderLiquorTable (drinking_id, liquor_id, how_id, amount_id, count) VALUES
+          INSERT INTO order_liquor (drinking_id, liquor_id, how_id, amount_id, count) VALUES
           (1, '350ml'),
           (2, '500ml'),
           (3, '中ジョッキ'),
@@ -85,12 +72,12 @@ class DatabaseHelper {
 
   Future<List> queryAllMemberName() async {
     Database db = await instance.database; //DBにアクセスする
-    return await db.rawQuery('SELECT * FROM $memberTable');
+    return await db.rawQuery('SELECT * FROM member');
   }
 
   Future<List> querySelectedMemberName(List indexList) async {
     Database db = await instance.database; //DBにアクセスする
-    String sql = 'SELECT member_name FROM $memberTable';
+    String sql = 'SELECT member_name FROM member';
 
     for (int i = 0; i < indexList.length; i++) {
       int index = indexList[i];
@@ -109,7 +96,7 @@ class DatabaseHelper {
   // 挿入 テストデータ用
   Future<int> insert(Map<String, dynamic> row) async {
     Database db = await instance.database; //DBにアクセスする
-    return await db.insert(memberTable, row); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
+    return await db.insert('member', row); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
   }
 
   // 全件取得
@@ -128,17 +115,20 @@ class DatabaseHelper {
   // 更新 テストデータ用
   Future<int> update(Map<String, dynamic> row) async {
     Database db = await instance.database; //DBにアクセスする
-    int id = row[memberColumnId]; //引数のマップ型のcolumnIDを取得
+    int id = row['member_id']; //引数のマップ型のcolumnIDを取得
     print([id]);
-    return await db.update(memberTable, row,
-        where: '$memberColumnId = ?', whereArgs: [id]);
+    return await db.update(
+      'member',
+      row,
+      where: 'member_id = ?',
+      whereArgs: [id],
+    );
   }
 
   // 削除 テストデータ用
   Future<int> delete(int id) async {
     Database db = await instance.database;
-    return await db
-        .delete(memberTable, where: '$memberColumnId = ?', whereArgs: [id]);
+    return await db.delete('member', where: 'member_id = ?', whereArgs: [id]);
   }
 
   // ! DB削除

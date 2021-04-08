@@ -42,7 +42,7 @@ class MemberDialogModel extends ChangeNotifier {
 
   void memberInsert() async {
     Map<String, dynamic> row = {
-      DatabaseHelper.memberColumnName: newMemberController.text,
+      'member_name': newMemberController.text,
     };
     final id = await dbHelper.insert(row);
     print('register new member row id: $id');
