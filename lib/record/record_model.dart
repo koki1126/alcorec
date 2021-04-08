@@ -23,8 +23,8 @@ class RecordModel extends ChangeNotifier {
       'price': priceEditingController.text,
       'memo': memoEditingController.text
     };
-    final id = await dbHelper.insertPost(post);
-    print(id);
+    final result = await dbHelper.insertPost(post);
+    print(result);
   }
 
   // ダイアログで選択したお酒をリストに追加

@@ -49,7 +49,7 @@ class DatabaseHelper {
   // Helper methods
 
   // 新規投稿を登録
-  Future<int> insertPost(Map<String, dynamic> post) async {
+  Future<String> insertPost(Map<String, dynamic> post) async {
     Database db = await instance.database; //DBにアクセスする
 
     Map<String, dynamic> newDrinkingData = {
@@ -73,7 +73,17 @@ class DatabaseHelper {
       await db.insert('order_liquor', orderData);
     });
 
-    return 1;
+    // todo 中間テーブル(drinking_member)にinsert
+    // todo 飲み会にいたメンバーを1つずつinsert
+    post['member'].forEach((member) async {
+      Map<String, dynamic> drinkingMemberData = {
+        'drinking_id': drinkingIndex,
+        'member_id': member,
+      };
+      await db.insert('drinking_member', drinkingMemberData);
+    });
+
+    return '登録成功やったぜ';
   }
 
   Future<List> queryAllMemberName() async {
