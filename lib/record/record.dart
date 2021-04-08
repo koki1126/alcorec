@@ -187,6 +187,7 @@ class Record extends StatelessWidget {
                         onPressed: () {
                           // todo 登録処理
                           model.registerPost();
+                          Navigator.pop(context);
                         },
                       ),
                       // ! DBデバッグ用ダイアログ

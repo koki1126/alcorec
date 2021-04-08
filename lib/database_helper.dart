@@ -54,18 +54,22 @@ class DatabaseHelper {
     //await db.insert(
     //orderLiquorTable, rowList); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
 
-    post['liquor'].forEach((liquor) async {
-      await db.rawQuery('''
-          INSERT INTO order_liquor (drinking_id, liquor_id, how_id, amount_id, count) VALUES
-          (1, '350ml'),
-          (2, '500ml'),
-          (3, '中ジョッキ'),
-          (4, '大ジョッキ'),
-          (5, 'おちょこ'),
-          (6, '1合'),
-          (7, 'グラス')
-        ''');
-    });
+    Map<String, dynamic> newDrinkingData = {
+      'memo': post['memo'],
+      'price': post['price'],
+    };
+    // 新規飲み会をinsert
+    await db.insert('drinking', newDrinkingData);
+
+//    String order_liquor_sql = '''
+//          INSERT INTO order_liquor (drinking_id, liquor_id, how_id, amount_id, count) VALUES
+//          (1, '350ml'),
+//    ''';
+//
+//    post['liquor'].forEach((order) {
+//      print(order);
+//    });
+    //await db.rawQuery(sql);
 
     return 1;
   }
