@@ -27,13 +27,13 @@ class DebugDatabase extends StatelessWidget {
                             // member用
                             Container(
                               width: double.infinity,
-                              color: Colors.red,
+                              color: Colors.blue,
                               child: Column(
                                 children: [
                                   Text('member用'),
                                   RaisedButton(
                                     child: Text(
-                                      'insert',
+                                      'testdata insert',
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
@@ -71,22 +71,38 @@ class DebugDatabase extends StatelessWidget {
                                   Text('カスタム用'),
                                   RaisedButton(
                                     child: Text(
-                                      'query',
+                                      '【' +
+                                          model.tableName1 +
+                                          '】' +
+                                          ' get query',
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      // ! 引数にテーブル名を入力
-                                      model.showAllQuery('drinking');
+                                      model.showAllQuery(model.tableName1);
                                     },
                                   ),
                                   RaisedButton(
                                     child: Text(
-                                      'delete',
+                                      '【' +
+                                          model.tableName2 +
+                                          '】' +
+                                          ' get query',
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      // ! 引数にテーブル名を入力
-                                      model.delete('drinking');
+                                      model.showAllQuery(model.tableName2);
+                                    },
+                                  ),
+                                  RaisedButton(
+                                    child: Text(
+                                      '【' +
+                                          model.tableName3 +
+                                          '】' +
+                                          ' get query',
+                                      style: TextStyle(fontSize: 20),
+                                    ),
+                                    onPressed: () {
+                                      model.showAllQuery(model.tableName3);
                                     },
                                   ),
                                 ],

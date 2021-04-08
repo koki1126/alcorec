@@ -5,6 +5,12 @@ class DebugDatabaseModel extends ChangeNotifier {
   // database_helper.dartのDataBaseHelperをインスタンス化
   final dbHelper = DatabaseHelper.instance;
 
+  // ! クエリを取得したいテーブル名を入力
+  String tableName1 = 'drinking';
+  String tableName2 = 'order_liquor';
+  String tableName3 = 'member';
+  // ! ==========================
+
   // テストデータを登録
   void testMemberInsert() async {
     // テストデータ
@@ -18,7 +24,7 @@ class DebugDatabaseModel extends ChangeNotifier {
   // 全クエリを取得
   Future<List<Map<String, dynamic>>> showAllQuery(tableName) async {
     final allRows = await dbHelper.queryAllRows(tableName);
-    print('$tableName query all rows:');
+    print('########## $tableName query all rows: ##########');
     allRows.forEach((row) => print(row));
     return allRows;
   }
