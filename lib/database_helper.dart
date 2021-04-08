@@ -48,28 +48,30 @@ class DatabaseHelper {
 
   // Helper methods
 
-  // 投稿を登録
+  // 新規投稿を登録
   Future<int> insertPost(Map<String, dynamic> post) async {
     Database db = await instance.database; //DBにアクセスする
-    //await db.insert(
-    //orderLiquorTable, rowList); //テーブルにマップ型のものを挿入。追加時のrowIDを返り値にする
 
     Map<String, dynamic> newDrinkingData = {
       'memo': post['memo'],
       'price': post['price'],
     };
     // 新規飲み会をinsert
-    await db.insert('drinking', newDrinkingData);
+    // 戻り値は追加時のdrinking_id
+    int drinkingIndex = await db.insert('drinking', newDrinkingData);
 
-//    String order_liquor_sql = '''
-//          INSERT INTO order_liquor (drinking_id, liquor_id, how_id, amount_id, count) VALUES
-//          (1, '350ml'),
-//    ''';
-//
-//    post['liquor'].forEach((order) {
-//      print(order);
-//    });
-    //await db.rawQuery(sql);
+    // 注文したお酒を1つずつinsert
+    // todo order_countを設定
+    post['liquor'].forEach((order) async {
+      Map<String, dynamic> orderData = {
+        'drinking_id': drinkingIndex,
+        'liquor_id': order[0],
+        'how_id': order[1],
+        'amount_id': order[2],
+        'order_count': 1,
+      };
+      await db.insert('order_liquor', orderData);
+    });
 
     return 1;
   }
@@ -109,11 +111,11 @@ class DatabaseHelper {
     return await db.query(tableName); //全件取得
   }
 
-  // データ件数取得 テストデータ用
+  // データ件数取得 memberテストデータ用
   Future<int> queryRowCount(tableName) async {
     Database db = await instance.database; //DBにアクセスする
     return Sqflite.firstIntValue(
-        await db.rawQuery('SELECT COUNT(*) FROM $tableName'));
+        await db.rawQuery('SELECT COUNT(*) FROM member'));
   }
 
   // 更新 テストデータ用
