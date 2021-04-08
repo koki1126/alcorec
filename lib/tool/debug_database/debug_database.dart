@@ -62,20 +62,21 @@ class DebugDatabase extends StatelessWidget {
                               ),
                             ),
 
-                            // liquor用
+                            // クエリ確認用カスタム
                             Container(
-                              color: Colors.blue,
+                              color: Colors.green,
                               width: double.infinity,
                               child: Column(
                                 children: [
-                                  Text('liquor用'),
+                                  Text('カスタム用'),
                                   RaisedButton(
                                     child: Text(
                                       'query',
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      model.showAllQuery('liquor');
+                                      // ! 引数にテーブル名を入力
+                                      model.showAllQuery('drinking');
                                     },
                                   ),
                                   RaisedButton(
@@ -84,7 +85,8 @@ class DebugDatabase extends StatelessWidget {
                                       style: TextStyle(fontSize: 20),
                                     ),
                                     onPressed: () {
-                                      model.delete('liquor');
+                                      // ! 引数にテーブル名を入力
+                                      model.delete('drinking');
                                     },
                                   ),
                                 ],
