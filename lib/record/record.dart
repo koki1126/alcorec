@@ -14,8 +14,11 @@ class Record extends StatelessWidget {
       create: (_) => RecordModel(),
       child: Consumer<RecordModel>(
         builder: (context, model, child) {
+          // 渡された今日の日付をmodelファイルに格納
+          // todo もう少し効率いい記述あるかも
+          model.toDayDate = Provider.of<String>(context);
           return Scaffold(
-            appBar: Header(headerWord: Provider.of<String>(context)),
+            appBar: Header(headerWord: model.toDayDate),
             body: GestureDetector(
               onTap: () {
                 model.priceFocusNode.unfocus();

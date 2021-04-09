@@ -53,6 +53,7 @@ class DatabaseHelper {
     Database db = await instance.database; //DBにアクセスする
 
     Map<String, dynamic> newDrinkingData = {
+      'event_date': post['event_date'],
       'memo': post['memo'],
       'price': post['price'],
     };

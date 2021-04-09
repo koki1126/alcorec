@@ -12,12 +12,15 @@ class RecordModel extends ChangeNotifier {
   List<int> addLiquor;
   List<List<int>> addLiquorList = [];
 
+  String toDayDate;
+
   // database_helper.dartのDataBaseHelperをインスタンス化
   final dbHelper = DatabaseHelper.instance;
 
   Future<void> registerPost() async {
     // 登録内容
     Map<String, dynamic> post = {
+      'event_date': toDayDate,
       'liquor': addLiquorList,
       'member': selectedMember[0],
       'price': priceEditingController.text,
