@@ -1,7 +1,7 @@
 import 'package:alcorec/home/home.dart';
 import 'package:flutter/material.dart';
-import 'package:alcorec/components/header.dart';
 import 'package:alcorec/kari.dart';
+import 'package:intl/intl.dart';
 //カレンダー関係
 import 'package:flutter_calendar_carousel/flutter_calendar_carousel.dart'
     show CalendarCarousel;
@@ -13,12 +13,20 @@ import 'package:fluttertoast/fluttertoast.dart';
 class HomeModel extends ChangeNotifier {
 //  ロジックを記述
   final String title = '酒';
+  DateTime now = DateTime.now();
 
   //画面部分
-  final mainTabs = [
-    HomePage(),
-    Kari(),
-  ];
+  //final mainTabs = [
+  //HomePage(),
+  //Kari(),
+  //];
+
+  // 今日の日付をyyyy-MM-dd形式で取得
+  String getToDayDate() {
+    DateFormat outputFormat = DateFormat('yyyy-MM-dd');
+    String date = outputFormat.format(now);
+    return date;
+  }
 
   // final headerTabs = [
   //   Header(headerTitle: 'ホーム'),
@@ -30,8 +38,6 @@ class HomeModel extends ChangeNotifier {
   //   // TODO: implement notifyListeners
   //   super.notifyListeners();
   // }
-
-  DateTime currentDate = DateTime.now();
 
   void onDayPressed(DateTime date, List<Event> events) {
     // this.setState(() = > _currentDate = date);

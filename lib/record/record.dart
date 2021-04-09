@@ -1,7 +1,7 @@
 import 'package:alcorec/tool/debug_database/debug_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../components/header.dart';
+import '../components/header_model.dart/header.dart';
 import 'liquor_dialog/liquor_dialog.dart';
 import 'liquor_dialog/new_liquor_dialog.dart';
 import 'member_dialog/member_dialog.dart';
@@ -15,7 +15,7 @@ class Record extends StatelessWidget {
       child: Consumer<RecordModel>(
         builder: (context, model, child) {
           return Scaffold(
-            appBar: Header(headerWord: '記録する'),
+            appBar: Header(headerWord: Provider.of<String>(context)),
             body: GestureDetector(
               onTap: () {
                 model.priceFocusNode.unfocus();

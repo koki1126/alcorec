@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('こんにちは'),
+              title: Text('alcorec'),
               backgroundColor: Colors.orange,
             ),
 
@@ -34,7 +34,7 @@ class HomePage extends StatelessWidget {
                 weekFormat: false,
                 height: 500,
                 weekDayBackgroundColor: Colors.orange.shade300,
-                selectedDateTime: model.currentDate,
+                selectedDateTime: model.now,
                 daysHaveCircularBorder: true,
                 // customGridViewPhysics: NeverScrollableScrollPhysics(),
                 markedDateShowIcon: true,
@@ -63,15 +63,16 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => Record(),
-                  ),
-                  //現状飛ばない
+                      builder: (context) => Provider<String>.value(
+                            value: model.getToDayDate(),
+                            child: Record(),
+                          )),
                 );
               },
               child: Icon(Icons.add),
             ),
 
-            //今後の追加機能
+            //今後フッターを追加する用
             // bottomNavigationBar: BottomAppBar(
             //   color: Theme.of(context).primaryColor,
             //   notchMargin: 6.0,

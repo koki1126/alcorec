@@ -14,7 +14,7 @@ Map<int, String> migrationScripts = {
             drinking_id INTEGER PRIMARY KEY AUTOINCREMENT,
             memo TEXT NOT NULL,
             price INTEGER NOT NULL,
-            event_date DATE DEFAULT (datetime('now','localtime'))
+            event_date DATE NOT NULL
           )
       ''',
   3: '''
