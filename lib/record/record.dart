@@ -123,6 +123,7 @@ class Record extends StatelessWidget {
                                     builder: (_) {
                                       //return AddToMemberDialog();
                                       return Provider<List>.value(
+                                        // チェックされている状態ならデータを渡す
                                         value: model.selectedMember == null
                                             ? []
                                             : model.selectedMember[1],

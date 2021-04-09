@@ -73,8 +73,8 @@ class DatabaseHelper {
       await db.insert('order_liquor', orderData);
     });
 
-    // todo 中間テーブル(drinking_member)にinsert
-    // todo 飲み会にいたメンバーを1つずつinsert
+    // 中間テーブル(drinking_member)にinsert
+    // 飲み会にいたメンバーを1つずつinsert
     post['member'].forEach((member) async {
       Map<String, dynamic> drinkingMemberData = {
         'drinking_id': drinkingIndex,
