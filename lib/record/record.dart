@@ -1,9 +1,9 @@
+import 'package:alcorec/record/widget.dart';
 import 'package:alcorec/tool/debug_database/debug_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/header_model.dart/header.dart';
 import 'liquor_dialog/liquor_dialog.dart';
-import 'liquor_dialog/new_liquor_dialog.dart';
 import 'member_dialog/member_dialog.dart';
 import 'record_model.dart';
 
@@ -31,28 +31,31 @@ class Record extends StatelessWidget {
                     children: [
                       // ! お酒の記録
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                              height: 20,
-                              width: double.infinity,
-                              child: Text(
-                                'お酒の記録',
-                                textAlign: TextAlign.left,
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 0, 0, 8),
+                              child: Container(
+                                height: 20,
+                                width: double.infinity,
+                                child: Text(
+                                  '▼お酒の記録',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                            // 選択したお酒を表示する
-                            model.addLiquor == null
-                                ? Text('お酒を追加してね')
-                                : Text(model.addLiquorList.toString()),
+                            DisplayOrderLiquor(model: model),
                             SizedBox(
-                              height: 50,
-                              width: double.infinity,
+                              height: 10,
+                            ),
+                            SizedBox(
+                              height: 40,
+                              width: 160,
                               child: RaisedButton(
-                                shape: StadiumBorder(),
-                                child: Text('過去の記録から'),
+                                child: Text('注文を追加'),
                                 color: Colors.orange,
                                 textColor: Colors.white,
                                 onPressed: () async {
@@ -68,55 +71,34 @@ class Record extends StatelessWidget {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 5,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: RaisedButton(
-                                shape: StadiumBorder(),
-                                child: Text('新規に登録'),
-                                color: Colors.yellow.shade700,
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) {
-                                      return NewLiquorDialog();
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
                           ],
                         ),
                       ),
 
                       // ! メンバーの記録
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(5.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            SizedBox(
-                              height: 20,
-                              width: double.infinity,
-                              child: Text(
-                                'メンバーの記録',
-                                textAlign: TextAlign.left,
+                            Padding(
+                              padding: EdgeInsets.fromLTRB(0, 0, 0, 8),
+                              child: Container(
+                                height: 20,
+                                width: double.infinity,
+                                child: Text(
+                                  '▼メンバーの記録',
+                                  textAlign: TextAlign.left,
+                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                ),
                               ),
                             ),
-                            // 選択したメンバーを表示する
-                            model.selectedMember == null
-                                ? Text('選択したメンバー')
-                                : Text(model.selectedMember[0].toString()),
+                            DisplaySelectedMember(model: model),
+                            SizedBox(height: 10),
                             SizedBox(
-                              height: 50,
-                              width: double.infinity,
+                              height: 40,
+                              width: 160,
                               child: RaisedButton(
-                                shape: StadiumBorder(),
                                 child: Text('メンバーを追加する'),
                                 color: Colors.orange,
                                 textColor: Colors.white,
@@ -138,44 +120,21 @@ class Record extends StatelessWidget {
                                 },
                               ),
                             ),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 5,
-                            ),
-                            SizedBox(
-                              width: double.infinity,
-                              height: 50,
-                              child: RaisedButton(
-                                shape: StadiumBorder(),
-                                child: Text('新しいメンバー'),
-                                color: Colors.yellow.shade700,
-                                textColor: Colors.white,
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (_) {
-                                      return NewMemberDialog();
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
                           ],
                         ),
                       ),
-
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(5.0),
                         child: TextField(
                           focusNode: model.priceFocusNode,
                           controller: model.priceEditingController,
                           decoration: InputDecoration(
-                            labelText: '飲食代',
+                            labelText: '使ったお金',
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(5.0),
                         child: TextField(
                           focusNode: model.memoFocusNode,
                           controller: model.memoEditingController,

@@ -37,6 +37,37 @@ class RecordModel extends ChangeNotifier {
     addLiquor = [];
   }
 
+  // 動的にWrap要素を生成するメソッド
+  List<Widget> createWrapChildren() {
+    // todo member_idからmember_nameを検索する
+    return List<Widget>.generate(selectedMember[0].length, (int index) {
+      // 可変長サイズのボタンを生成
+      return ConstrainedBox(
+        constraints: BoxConstraints(minWidth: 10, maxWidth: double.infinity),
+        child: ButtonTheme(
+          minWidth: 10,
+          child: Padding(
+            padding: EdgeInsets.fromLTRB(2, 5, 2, 5),
+            child: Container(
+              height: 30,
+              child: RaisedButton(
+                child: Text(selectedMember[0][index].toString()),
+                color: Colors.white,
+                shape: StadiumBorder(
+                  side: BorderSide(color: Colors.orange),
+                ),
+                onPressed: () {
+                  // todo 選択削除
+                },
+                splashColor: Colors.orange,
+              ),
+            ),
+          ),
+        ),
+      );
+    });
+  }
+
   // 画面を再描画する用メソッド
   void displayReload() {
     notifyListeners();

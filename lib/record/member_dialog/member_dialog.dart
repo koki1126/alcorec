@@ -10,37 +10,78 @@ class AddToMemberDialog extends StatelessWidget {
       child: Consumer<MemberDialogModel>(
         builder: (context, model, child) {
           return AlertDialog(
+            insetPadding: EdgeInsets.all(0),
             title: Text('メンバーを追加'),
             content: Container(
-              height: 300.0,
-              width: 300.0,
-              child: FutureBuilder(
-                future: model.getRegisteredMember(),
-                builder: (BuildContext context, AsyncSnapshot snapshot) {
-                  if (snapshot.hasData) {
-                    model.checkboxList == null
-                        ? model.initValue(
-                            snapshot.data,
-                            Provider.of<List>(context),
-                          )
-                        : null;
-                    return ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        return CheckboxListTile(
-                          value: model.checkboxList[index],
-                          title: Text(snapshot.data[index]['member_name']),
-                          onChanged: (value) {
-                            model.tapCheckbox(index, value);
-                          },
-                        );
+              height: 500,
+              width: 300,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Container(
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                    child: TextFormField(
+                      keyboardType: TextInputType.text,
+                      controller: model.newMemberController,
+                      decoration: InputDecoration(
+                        hintText: 'Enter Name',
+                        icon: Icon(Icons.add_circle_outline),
+                      ),
+                    ),
+                  ),
+                  FlatButton(
+                    child: Text('登録'),
+                    color: Colors.blue,
+                    onPressed: () {
+                      model.newMemberController.text != ''
+                          ? model.memberInsert()
+                          : null; // 新規メンバーを追加
+                      //Navigator.pop(context);
+                    },
+                  ),
+                  Container(
+                    height: 20,
+                    width: double.infinity,
+                    child: Text(
+                      '▼ 登録済みのメンバー',
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Container(
+                    height: 360,
+                    child: FutureBuilder(
+                      future: model.getRegisteredMember(),
+                      builder: (BuildContext context, AsyncSnapshot snapshot) {
+                        if (snapshot.hasData) {
+                          model.checkboxList == null
+                              ? model.initValue(
+                                  snapshot.data,
+                                  Provider.of<List>(context),
+                                )
+                              : null;
+                          return ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return CheckboxListTile(
+                                value: model.checkboxList[index],
+                                title:
+                                    Text(snapshot.data[index]['member_name']),
+                                onChanged: (value) {
+                                  model.tapCheckbox(index, value);
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          return CircularProgressIndicator(); // データをロードできていなけれなぐるぐるを表示
+                        }
                       },
-                    );
-                  } else {
-                    return CircularProgressIndicator(); // データをロードできていなけれなぐるぐるを表示
-                  }
-                },
+                    ),
+                  ),
+                ],
               ),
             ),
             actions: <Widget>[
@@ -55,44 +96,6 @@ class AddToMemberDialog extends StatelessWidget {
                   Future<List> selectedMember =
                       model.createSelectedMemberList();
                   Navigator.pop(context, selectedMember);
-                },
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-}
-
-class NewMemberDialog extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider<MemberDialogModel>(
-      create: (_) => MemberDialogModel(),
-      child: Consumer<MemberDialogModel>(
-        builder: (context, model, child) {
-          return AlertDialog(
-            title: Text('メンバーを新規追加'),
-            content: TextField(
-              controller: model.newMemberController,
-              decoration: InputDecoration(
-                labelText: '名前を入力',
-              ),
-            ),
-            actions: <Widget>[
-              // ボタン領域
-              FlatButton(
-                child: Text("Cancel"),
-                onPressed: () => Navigator.pop(context),
-              ),
-              FlatButton(
-                child: Text("OK"),
-                onPressed: () {
-                  model.newMemberController.text != ''
-                      ? model.memberInsert()
-                      : null; // 新規メンバーを追加
-                  Navigator.pop(context);
                 },
               ),
             ],
