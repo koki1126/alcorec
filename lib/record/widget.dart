@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:alcorec/record/record_model.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +11,7 @@ class DisplayOrderLiquor extends StatelessWidget {
   Widget build(BuildContext context) {
     return model.addLiquor == null
         ? Container(
-            height: 240,
+            height: 250,
             width: double.infinity,
             decoration: BoxDecoration(
               color: Colors.grey[200],
@@ -29,18 +27,18 @@ class DisplayOrderLiquor extends StatelessWidget {
             children: [
               Container(
                 height: 20,
-                color: Colors.orange[300],
+                //color: Colors.orange[300],
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('お酒'),
-                    Text('飲み方'),
-                    Text('量'),
+                    Expanded(flex: 3, child: Text('お酒')),
+                    Expanded(flex: 3, child: Text('飲み方')),
+                    Expanded(flex: 3, child: Text('量')),
+                    Expanded(flex: 1, child: Container()),
                   ],
                 ),
               ),
               Container(
-                height: 220,
+                height: 230,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.grey[200],
@@ -50,81 +48,71 @@ class DisplayOrderLiquor extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: model.addLiquorList.length,
                   itemBuilder: (BuildContext context, int index) {
-                    return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        RaisedButton(
-                          child: Text(model.addLiquorList[index][0].toString()),
-                          color: Colors.orange[100],
-                          shape: Border(
-                            top: BorderSide(color: Colors.green),
-                            //right: BorderSide(color: Colors.green),
-                            bottom: BorderSide(color: Colors.green),
-                            left: BorderSide(color: Colors.green),
-                          ),
-                          onPressed: () {
-                            // todo 選択削除
+                    return InkWell(
+                      onTap: () {
+                        // todo
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: Text('Aの動作の確認'),
+                            );
                           },
-                          splashColor: Colors.orange,
+                        );
+                      },
+                      child: Container(
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.orange,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Text(
+                                    model.addLiquorList[index][0].toString()),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.orange,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Text(
+                                    model.addLiquorList[index][1].toString()),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 3,
+                              child: Container(
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.orange,
+                                    width: 1,
+                                  ),
+                                ),
+                                child: Text(
+                                    model.addLiquorList[index][2].toString()),
+                              ),
+                            ),
+                            Expanded(
+                              // todo 杯数カウント
+                              flex: 1,
+                              child: Center(child: Text('1')),
+                            ),
+                          ],
                         ),
-                        RaisedButton(
-                          child: Text(model.addLiquorList[index][1].toString()),
-                          color: Colors.orange[100],
-                          shape: Border(
-                            top: BorderSide(color: Colors.green),
-                            //right: BorderSide(color: Colors.green),
-                            bottom: BorderSide(color: Colors.green),
-                            //left: BorderSide(color: Colors.green),
-                          ),
-                          onPressed: () {
-                            // todo 選択削除
-                          },
-                          splashColor: Colors.orange,
-                        ),
-                        RaisedButton(
-                          child: Text(model.addLiquorList[index][2].toString()),
-                          color: Colors.orange[100],
-                          shape: Border(
-                            top: BorderSide(color: Colors.green),
-                            right: BorderSide(color: Colors.green),
-                            bottom: BorderSide(color: Colors.green),
-                            //left: BorderSide(color: Colors.green),
-                          ),
-                          onPressed: () {
-                            // todo 選択削除
-                          },
-                          splashColor: Colors.orange,
-                        ),
-                        //RaisedButton(
-                        //child: Text(model.addLiquorList[index][1].toString()),
-                        //color: Colors.green[100],
-                        //shape: StadiumBorder(
-                        //side: BorderSide(color: Colors.green),
-                        //),
-                        //onPressed: () {
-                        //// todo 選択削除
-                        //},
-                        //splashColor: Colors.orange,
-                        //),
-                        //RaisedButton(
-                        //child: Text(model.addLiquorList[index][2].toString()),
-                        //color: Colors.green[100],
-                        //shape: StadiumBorder(
-                        //side: BorderSide(color: Colors.green),
-                        //),
-                        //onPressed: () {
-                        //// todo 選択削除
-                        //},
-                        //splashColor: Colors.orange,
-                        //),
-                        Text('1'),
-                        IconButton(
-                          icon: Icon(Icons.add),
-                          onPressed: () {
-                            // todo 選択削除
-                          },
-                        ),
-                      ],
+                      ),
                     );
                   },
                 ),
