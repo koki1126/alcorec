@@ -33,7 +33,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                     Expanded(flex: 3, child: Text('お酒')),
                     Expanded(flex: 3, child: Text('飲み方')),
                     Expanded(flex: 3, child: Text('量')),
-                    Expanded(flex: 1, child: Container()),
+                    Expanded(flex: 3, child: Container()),
                   ],
                 ),
               ),
@@ -73,8 +73,11 @@ class DisplayOrderLiquor extends StatelessWidget {
                                     width: 1,
                                   ),
                                 ),
-                                child: Text(
-                                    model.addLiquorList[index][0].toString()),
+                                child: Center(
+                                  child: Text(
+                                    model.addLiquorList[index][0].toString(),
+                                  ),
+                                ),
                               ),
                             ),
                             Expanded(
@@ -87,8 +90,11 @@ class DisplayOrderLiquor extends StatelessWidget {
                                     width: 1,
                                   ),
                                 ),
-                                child: Text(
-                                    model.addLiquorList[index][1].toString()),
+                                child: Center(
+                                  child: Text(
+                                    model.addLiquorList[index][1].toString(),
+                                  ),
+                                ),
                               ),
                             ),
                             Expanded(
@@ -101,14 +107,26 @@ class DisplayOrderLiquor extends StatelessWidget {
                                     width: 1,
                                   ),
                                 ),
-                                child: Text(
-                                    model.addLiquorList[index][2].toString()),
+                                child: Center(
+                                  child: Text(
+                                    model.addLiquorList[index][2].toString(),
+                                  ),
+                                ),
                               ),
                             ),
                             Expanded(
                               // todo 杯数カウント
-                              flex: 1,
-                              child: Center(child: Text('1')),
+                              flex: 3,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  // todo カウント加減処理
+                                  Icon(Icons.remove_rounded),
+                                  Text('1'),
+                                  Icon(Icons.add),
+                                ],
+                              ),
                             ),
                           ],
                         ),
