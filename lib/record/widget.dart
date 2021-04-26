@@ -46,7 +46,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                 ),
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: model.addLiquorList.length,
+                  itemCount: model.addOrderList.length,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onLongPress: () {
@@ -93,7 +93,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          model.addLiquorList[index][0]
+                                          model.addOrderList[index][0]
                                               .toString(),
                                         ),
                                       ),
@@ -112,7 +112,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          model.addLiquorList[index][1]
+                                          model.addOrderList[index][1]
                                               .toString(),
                                         ),
                                       ),
@@ -131,7 +131,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          model.addLiquorList[index][2]
+                                          model.addOrderList[index][2]
                                               .toString(),
                                         ),
                                       ),

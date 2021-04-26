@@ -110,6 +110,41 @@ class DatabaseHelper {
     return await db.rawQuery(sql);
   }
 
+  // 注文のidからvalueを返す
+  Future<List<String>> queryOrderValue(List orderId) async {
+    Database db = await instance.database; //DBにアクセスする
+    int liquorId = orderId[0];
+    int howId = orderId[1];
+    int amountId = orderId[2];
+
+    List<Map<String, dynamic>> liquorName = await db.query(
+      'liquor',
+      columns: ['liquor_name'],
+      where: 'liquor_id = ?',
+      whereArgs: [liquorId],
+    );
+    List<Map<String, dynamic>> way = await db.query(
+      'how',
+      columns: ['way'],
+      where: 'how_id = ?',
+      whereArgs: [howId],
+    );
+    List<Map<String, dynamic>> capacity = await db.query(
+      'amount',
+      columns: ['capacity'],
+      where: 'amount_id = ?',
+      whereArgs: [amountId],
+    );
+    print(way);
+
+    // お酒のvalue、飲み方のvalue、量のvalue
+    return [
+      liquorName[0]['liquor_name'],
+      way[0]['way'],
+      capacity[0]['capacity']
+    ];
+  }
+
   // 挿入 テストデータ用
   Future<int> insert(Map<String, dynamic> row) async {
     Database db = await instance.database; //DBにアクセスする

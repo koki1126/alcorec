@@ -10,7 +10,7 @@ class RecordModel extends ChangeNotifier {
 
   var selectedMember;
   List<int> addLiquor;
-  List<List<int>> addLiquorList = [];
+  List<List<String>> addOrderList = [];
 
   String toDayDate;
 
@@ -21,7 +21,7 @@ class RecordModel extends ChangeNotifier {
     // 登録内容
     Map<String, dynamic> post = {
       'event_date': toDayDate,
-      'liquor': addLiquorList,
+      'liquor': addOrderList,
       'member': selectedMember[0],
       'price': priceEditingController.text,
       'memo': memoEditingController.text
@@ -31,8 +31,10 @@ class RecordModel extends ChangeNotifier {
   }
 
   // ダイアログで選択したお酒をリストに追加
-  void createAddLiquorList() {
-    addLiquorList.add(addLiquor);
+  void createAddLiquorList() async {
+    // todo addLiquorに格納された番号からお酒データを引っ張ってくる
+    List<String> addOrderValue = await dbHelper.queryOrderValue(addLiquor);
+    addOrderList.add(addOrderValue);
     notifyListeners();
     addLiquor = [];
   }
@@ -43,7 +45,7 @@ class RecordModel extends ChangeNotifier {
     return List<Widget>.generate(selectedMember[0].length, (int index) {
       // 可変長サイズのボタンを生成
       return ConstrainedBox(
-        constraints: BoxConstraints(minWidth: 10, maxWidth: double.infinity),
+        constraints: BoxConstraints(minWidth: 10),
         child: ButtonTheme(
           minWidth: 10,
           child: Padding(
