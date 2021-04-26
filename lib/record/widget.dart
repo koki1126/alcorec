@@ -53,9 +53,22 @@ class DisplayOrderLiquor extends StatelessWidget {
                         // todo
                         showDialog(
                           context: context,
-                          builder: (context) {
+                          builder: (_) {
                             return AlertDialog(
-                              title: Text('Aの動作の確認'),
+                              title: Text('削除しますか？'),
+                              actions: <Widget>[
+                                // ボタン領域
+                                FlatButton(
+                                  child: Text("Cancel"),
+                                  onPressed: () => Navigator.pop(context),
+                                ),
+                                FlatButton(
+                                  child: Text("OK"),
+                                  onPressed: () {
+                                    // todo
+                                  },
+                                ),
+                              ],
                             );
                           },
                         );
@@ -72,6 +85,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                     child: Container(
                                       height: 45,
                                       decoration: BoxDecoration(
+                                        color: Colors.white,
                                         border: Border.all(
                                           color: Colors.orange,
                                           width: 1,
@@ -90,6 +104,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                     child: Container(
                                       height: 45,
                                       decoration: BoxDecoration(
+                                        color: Colors.white,
                                         border: Border.all(
                                           color: Colors.orange,
                                           width: 1,
@@ -108,6 +123,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                     child: Container(
                                       height: 45,
                                       decoration: BoxDecoration(
+                                        color: Colors.white,
                                         border: Border.all(
                                           color: Colors.orange,
                                           width: 1,
