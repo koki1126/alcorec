@@ -49,7 +49,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                   itemCount: model.addLiquorList.length,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
-                      onTap: () {
+                      onLongPress: () {
                         // todo
                         showDialog(
                           context: context,
@@ -65,66 +65,96 @@ class DisplayOrderLiquor extends StatelessWidget {
                           children: [
                             Expanded(
                               flex: 3,
-                              child: Container(
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.orange,
-                                    width: 1,
+                              child: Row(
+                                children: [
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.orange,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          model.addLiquorList[index][0]
+                                              .toString(),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    model.addLiquorList[index][0].toString(),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.orange,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          model.addLiquorList[index][1]
+                                              .toString(),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.orange,
-                                    width: 1,
+                                  Expanded(
+                                    flex: 1,
+                                    child: Container(
+                                      height: 45,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.orange,
+                                          width: 1,
+                                        ),
+                                      ),
+                                      child: Center(
+                                        child: Text(
+                                          model.addLiquorList[index][2]
+                                              .toString(),
+                                        ),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    model.addLiquorList[index][1].toString(),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              flex: 3,
-                              child: Container(
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  border: Border.all(
-                                    color: Colors.orange,
-                                    width: 1,
-                                  ),
-                                ),
-                                child: Center(
-                                  child: Text(
-                                    model.addLiquorList[index][2].toString(),
-                                  ),
-                                ),
+                                ],
                               ),
                             ),
                             Expanded(
                               // todo 杯数カウント
-                              flex: 3,
+                              flex: 1,
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
                                 children: [
                                   // todo カウント加減処理
-                                  Icon(Icons.remove_rounded),
-                                  Text('1'),
-                                  Icon(Icons.add),
+                                  Expanded(
+                                    flex: 2,
+                                    child: IconButton(
+                                      icon: Icon(Icons.remove_rounded),
+                                      onPressed: () {
+                                        // todo
+                                      },
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Center(
+                                      // todo
+                                      child: Text('10'),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: IconButton(
+                                      icon: Icon(Icons.add),
+                                      onPressed: () {
+                                        // todo
+                                      },
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
