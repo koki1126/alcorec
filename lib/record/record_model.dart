@@ -46,38 +46,6 @@ class RecordModel extends ChangeNotifier {
         await dbHelper.querySelectedMemberName(selectedMember[0]);
   }
 
-  // 動的にWrap要素を生成するメソッド
-  List<Widget> createWrapChildren() {
-    return List<Widget>.generate(selectedMember[0].length, (int index) {
-      // 可変長サイズのボタンを生成
-      return ConstrainedBox(
-        constraints: BoxConstraints(minWidth: 10),
-        child: ButtonTheme(
-          minWidth: 10,
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(2, 5, 2, 5),
-            child: Container(
-              height: 30,
-              child: RaisedButton(
-                //child: Text(selectedMember[0][index].toString()),
-                child:
-                    Text(selectedMemberName[index]['member_name'].toString()),
-                color: Colors.white,
-                shape: StadiumBorder(
-                  side: BorderSide(color: Colors.orange),
-                ),
-                onPressed: () {
-                  // todo 選択削除
-                },
-                splashColor: Colors.orange,
-              ),
-            ),
-          ),
-        ),
-      );
-    });
-  }
-
   // 画面を再描画する用メソッド
   void displayReload() {
     notifyListeners();
