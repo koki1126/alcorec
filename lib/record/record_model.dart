@@ -8,9 +8,10 @@ class RecordModel extends ChangeNotifier {
   TextEditingController priceEditingController = TextEditingController();
   TextEditingController memoEditingController = TextEditingController();
 
-  var selectedMember;
-  List<int> addLiquor;
-  List<List<String>> addOrderList = [];
+  List selectedMember;
+  List<Map<String, dynamic>> selectedMemberName;
+  List<int> orderedLiquor;
+  List<List<String>> allOrderedLiquor = [];
 
   String toDayDate;
 
@@ -21,7 +22,7 @@ class RecordModel extends ChangeNotifier {
     // 登録内容
     Map<String, dynamic> post = {
       'event_date': toDayDate,
-      'liquor': addOrderList,
+      'liquor': allOrderedLiquor,
       'member': selectedMember[0],
       'price': priceEditingController.text,
       'memo': memoEditingController.text
@@ -33,15 +34,20 @@ class RecordModel extends ChangeNotifier {
   // ダイアログで選択したお酒をリストに追加
   void createAddLiquorList() async {
     // todo addLiquorに格納された番号からお酒データを引っ張ってくる
-    List<String> addOrderValue = await dbHelper.queryOrderValue(addLiquor);
-    addOrderList.add(addOrderValue);
+    List<String> addOrderValue = await dbHelper.queryOrderValue(orderedLiquor);
+    allOrderedLiquor.add(addOrderValue);
     notifyListeners();
-    addLiquor = [];
+    orderedLiquor = [];
+  }
+
+  //member_idからmember_nameを検索する
+  void getMemberName() async {
+    selectedMemberName =
+        await dbHelper.querySelectedMemberName(selectedMember[0]);
   }
 
   // 動的にWrap要素を生成するメソッド
   List<Widget> createWrapChildren() {
-    // todo member_idからmember_nameを検索する
     return List<Widget>.generate(selectedMember[0].length, (int index) {
       // 可変長サイズのボタンを生成
       return ConstrainedBox(
@@ -53,7 +59,9 @@ class RecordModel extends ChangeNotifier {
             child: Container(
               height: 30,
               child: RaisedButton(
-                child: Text(selectedMember[0][index].toString()),
+                //child: Text(selectedMember[0][index].toString()),
+                child:
+                    Text(selectedMemberName[index]['member_name'].toString()),
                 color: Colors.white,
                 shape: StadiumBorder(
                   side: BorderSide(color: Colors.orange),
@@ -74,13 +82,4 @@ class RecordModel extends ChangeNotifier {
   void displayReload() {
     notifyListeners();
   }
-
-  //void liquorInsert() async {
-  //Map<String, dynamic> row = {
-  //DatabaseHelper.memberColumnName: newLiquorController.text,
-  //};
-  //final id = await dbHelper.insert(row);
-  //print('register new liquor row id: $id');
-  //}
-
 }

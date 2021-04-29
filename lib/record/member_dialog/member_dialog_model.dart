@@ -3,15 +3,18 @@ import 'package:flutter/material.dart';
 
 class MemberDialogModel extends ChangeNotifier {
   List<bool> checkboxList;
-  var newMemberController = TextEditingController();
+  TextEditingController newMemberController = TextEditingController();
   List memberNameList;
+  // 繰り越しリスト用の配列
+  List takeOverMember;
+  List<int> selectedMemberIdList;
 
   // 登録済メンバーの数だけチェックボックスを作る
-  void initValue(List data, List takeOverMember) {
-    int count = data.length;
+  void initValue(List memberData) {
+    int count = memberData.length;
     memberNameList = [];
 
-    data.forEach((memberName) {
+    memberData.forEach((memberName) {
       memberNameList.add(memberName['member_id']);
     });
 
@@ -28,10 +31,9 @@ class MemberDialogModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<List> createSelectedMemberList() async {
-    List<int> selectedMemberIdList = [];
-
+  void createSelectedMemberList() {
     // チェックがついてるメンバーのmember_idを配列に格納
+    selectedMemberIdList = [];
     int i = 0;
     checkboxList.forEach((bool tf) {
       if (tf == true) {
@@ -39,9 +41,6 @@ class MemberDialogModel extends ChangeNotifier {
       }
       i++;
     });
-
-    // メンバーのmember_idを格納する
-    return [selectedMemberIdList, checkboxList];
   }
 
   // ! DB関連

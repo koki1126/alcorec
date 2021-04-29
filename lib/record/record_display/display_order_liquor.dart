@@ -9,7 +9,7 @@ class DisplayOrderLiquor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return model.addLiquor == null
+    return model.orderedLiquor == null
         ? Container(
             height: 250,
             width: double.infinity,
@@ -46,7 +46,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                 ),
                 child: ListView.builder(
                   shrinkWrap: true,
-                  itemCount: model.addOrderList.length,
+                  itemCount: model.allOrderedLiquor.length,
                   itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onLongPress: () {
@@ -93,7 +93,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          model.addOrderList[index][0]
+                                          model.allOrderedLiquor[index][0]
                                               .toString(),
                                         ),
                                       ),
@@ -112,7 +112,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          model.addOrderList[index][1]
+                                          model.allOrderedLiquor[index][1]
                                               .toString(),
                                         ),
                                       ),
@@ -131,7 +131,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                       ),
                                       child: Center(
                                         child: Text(
-                                          model.addOrderList[index][2]
+                                          model.allOrderedLiquor[index][2]
                                               .toString(),
                                         ),
                                       ),
@@ -182,26 +182,6 @@ class DisplayOrderLiquor extends StatelessWidget {
                 ),
               ),
             ],
-          );
-  }
-}
-
-// ダイアログで選択したメンバーを表示
-class DisplaySelectedMember extends StatelessWidget {
-  // 名前付きコンストラクタ
-  RecordModel model;
-  DisplaySelectedMember({Key key, @required this.model}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return model.selectedMember == null
-        ? Container()
-        : Container(
-            width: double.infinity,
-            child: Wrap(
-              direction: Axis.horizontal,
-              children: model.createWrapChildren(),
-            ),
           );
   }
 }

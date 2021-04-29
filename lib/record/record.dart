@@ -1,10 +1,11 @@
-import 'package:alcorec/record/widget.dart';
 import 'package:alcorec/tool/debug_database/debug_database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../components/header_model.dart/header.dart';
 import 'liquor_dialog/liquor_dialog.dart';
 import 'member_dialog/member_dialog.dart';
+import 'record_display/display_order_liquor.dart';
+import 'record_display/display_selected_member.dart';
 import 'record_model.dart';
 
 class Record extends StatelessWidget {
@@ -59,14 +60,13 @@ class Record extends StatelessWidget {
                                 color: Colors.orange,
                                 textColor: Colors.white,
                                 onPressed: () async {
-                                  model.addLiquor = await showDialog(
+                                  model.orderedLiquor = await showDialog(
                                     context: context,
                                     barrierColor: Colors.black.withOpacity(0.5),
                                     builder: (_) {
                                       return LiquorDialog();
                                     },
                                   );
-                                  //print(model.addLiquor);
                                   model.createAddLiquorList();
                                 },
                               ),
@@ -106,7 +106,6 @@ class Record extends StatelessWidget {
                                   model.selectedMember = await showDialog(
                                     context: context,
                                     builder: (_) {
-                                      //return AddToMemberDialog();
                                       return Provider<List>.value(
                                         // チェックされている状態ならデータを渡す
                                         value: model.selectedMember == null
@@ -116,6 +115,8 @@ class Record extends StatelessWidget {
                                       );
                                     },
                                   );
+                                  model.getMemberName();
+                                  // todo リファクタ
                                   model.displayReload();
                                 },
                               ),

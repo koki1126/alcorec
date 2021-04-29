@@ -94,20 +94,49 @@ class DatabaseHelper {
 
   Future<List> querySelectedMemberName(List indexList) async {
     Database db = await instance.database; //DBにアクセスする
+    List<Map<String, dynamic>> selectMemberName;
+    List<Map<String, dynamic>> selectMemberNameList = [];
+
     String sql = 'SELECT member_name FROM member';
 
-    for (int i = 0; i < indexList.length; i++) {
-      int index = indexList[i];
-      if (i == 0) {
-        index++; // 配列のインデックス番号と_idとの差分を修正
+    int count = 0;
+    indexList.forEach((index) {
+      if (count == 0) {
         sql += ' WHERE member_id = $index';
-      } else {
-        index++;
-        sql += ' OR member_id = $index';
       }
-    }
+      sql += ' OR member_id = $index';
+      count++;
+    });
 
     return await db.rawQuery(sql);
+
+//    indexList.forEach((index) async {
+//      selectMemberName = await db.query(
+//        'member',
+//        columns: ['member_name'],
+//        where: 'member_id = ?',
+//        whereArgs: [index],
+//      );
+//      print(index);
+//      print(selectMemberName);
+//      //selectMemberNameList.add(selectMemberName);
+//    });
+//    return [];
+
+//    String sql = 'SELECT member_name FROM member';
+//
+//    for (int i = 0; i < indexList.length; i++) {
+//      int index = indexList[i];
+//      if (i == 0) {
+//        index++; // 配列のインデックス番号と_idとの差分を修正
+//        sql += ' WHERE member_id = $index';
+//      } else {
+//        index++;
+//        sql += ' OR member_id = $index';
+//      }
+//    }
+//
+//    return await db.rawQuery(sql);
   }
 
   // 注文のidからvalueを返す
@@ -135,7 +164,6 @@ class DatabaseHelper {
       where: 'amount_id = ?',
       whereArgs: [amountId],
     );
-    print(way);
 
     // お酒のvalue、飲み方のvalue、量のvalue
     return [

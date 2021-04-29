@@ -9,6 +9,8 @@ class AddToMemberDialog extends StatelessWidget {
       create: (_) => MemberDialogModel(),
       child: Consumer<MemberDialogModel>(
         builder: (context, model, child) {
+          // 既にチェック済のリストがあれば繰り越す
+          model.takeOverMember = Provider.of<List>(context);
           return AlertDialog(
             insetPadding: EdgeInsets.all(0),
             title: Text('メンバーを追加'),
@@ -58,7 +60,6 @@ class AddToMemberDialog extends StatelessWidget {
                           model.checkboxList == null
                               ? model.initValue(
                                   snapshot.data,
-                                  Provider.of<List>(context),
                                 )
                               : null;
                           return ListView.builder(
@@ -93,9 +94,11 @@ class AddToMemberDialog extends StatelessWidget {
               FlatButton(
                 child: Text("OK"),
                 onPressed: () {
-                  Future<List> selectedMember =
-                      model.createSelectedMemberList();
-                  Navigator.pop(context, selectedMember);
+                  model.createSelectedMemberList();
+                  Navigator.pop(
+                    context,
+                    [model.selectedMemberIdList, model.checkboxList],
+                  );
                 },
               ),
             ],
