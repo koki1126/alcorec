@@ -27,7 +27,8 @@ class RecordModel extends ChangeNotifier {
       'liquor': allOrderedLiquor,
       'member': selectedMember[0], // member_idが格納
       'price': priceEditingController.text,
-      'memo': memoEditingController.text
+      'memo': memoEditingController.text,
+      'cupCount': allCupCount,
     };
     final result = await dbHelper.insertPost(post);
     print(result);
@@ -38,7 +39,7 @@ class RecordModel extends ChangeNotifier {
     // todo addLiquorに格納された番号からお酒データを引っ張ってくる
     List<String> addOrderValue = await dbHelper.queryOrderValue(orderedLiquor);
     allOrderedLiquor.add(addOrderValue);
-    allCupCount.add(0);
+    allCupCount.add(1);
     notifyListeners();
     orderedLiquor = [];
   }
@@ -63,7 +64,7 @@ class RecordModel extends ChangeNotifier {
 
   // 杯数のマイナス処理
   void minusCount(int index) {
-    if (allCupCount[index] != 0) {
+    if (allCupCount[index] != 1) {
       allCupCount[index]--;
       print(allCupCount);
       displayReload();

@@ -62,15 +62,16 @@ class DatabaseHelper {
     int drinkingIndex = await db.insert('drinking', newDrinkingData);
 
     // 注文したお酒を1つずつinsert
-    // todo order_countを設定
+    int countIndex = 0;
     post['liquor'].forEach((order) async {
       Map<String, dynamic> orderData = {
         'drinking_id': drinkingIndex,
         'liquor_id': order[0],
         'how_id': order[1],
         'amount_id': order[2],
-        'order_count': 1,
+        'order_count': post['cupCount'][countIndex],
       };
+      countIndex++;
       await db.insert('order_liquor', orderData);
     });
 
@@ -109,34 +110,6 @@ class DatabaseHelper {
     });
 
     return await db.rawQuery(sql);
-
-//    indexList.forEach((index) async {
-//      selectMemberName = await db.query(
-//        'member',
-//        columns: ['member_name'],
-//        where: 'member_id = ?',
-//        whereArgs: [index],
-//      );
-//      print(index);
-//      print(selectMemberName);
-//      //selectMemberNameList.add(selectMemberName);
-//    });
-//    return [];
-
-//    String sql = 'SELECT member_name FROM member';
-//
-//    for (int i = 0; i < indexList.length; i++) {
-//      int index = indexList[i];
-//      if (i == 0) {
-//        index++; // 配列のインデックス番号と_idとの差分を修正
-//        sql += ' WHERE member_id = $index';
-//      } else {
-//        index++;
-//        sql += ' OR member_id = $index';
-//      }
-//    }
-//
-//    return await db.rawQuery(sql);
   }
 
   // 注文のidからvalueを返す
