@@ -65,7 +65,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                 FlatButton(
                                   child: Text("OK"),
                                   onPressed: () {
-                                    // todo
+                                    // todo 削除処理
                                   },
                                 ),
                               ],
@@ -141,25 +141,26 @@ class DisplayOrderLiquor extends StatelessWidget {
                               ),
                             ),
                             Expanded(
-                              // todo 杯数カウント
+                              // 杯数カウント
                               flex: 1,
                               child: Row(
                                 children: [
-                                  // todo カウント加減処理
+                                  // カウント加減処理
                                   Expanded(
                                     flex: 2,
                                     child: IconButton(
                                       icon: Icon(Icons.remove_rounded),
                                       onPressed: () {
-                                        // todo
+                                        model.minusCount(index);
                                       },
                                     ),
                                   ),
                                   Expanded(
                                     flex: 1,
                                     child: Center(
-                                      // todo
-                                      child: Text('10'),
+                                      child: Text(
+                                        model.allCupCount[index].toString(),
+                                      ),
                                     ),
                                   ),
                                   Expanded(
@@ -167,7 +168,7 @@ class DisplayOrderLiquor extends StatelessWidget {
                                     child: IconButton(
                                       icon: Icon(Icons.add),
                                       onPressed: () {
-                                        // todo
+                                        model.plusCount(index);
                                       },
                                     ),
                                   ),

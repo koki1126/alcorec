@@ -15,7 +15,6 @@ class DisplaySelectedMember extends StatelessWidget {
             width: double.infinity,
             child: Wrap(
               direction: Axis.horizontal,
-              //children: model.createWrapChildren(),
               children: List<Widget>.generate(model.selectedMember[0].length,
                   (int index) {
                 // 可変長サイズのボタンを生成

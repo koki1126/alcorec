@@ -15,6 +15,8 @@ class RecordModel extends ChangeNotifier {
 
   String toDayDate;
 
+  List<int> allCupCount = [];
+
   // database_helper.dartのDataBaseHelperをインスタンス化
   final dbHelper = DatabaseHelper.instance;
 
@@ -23,7 +25,7 @@ class RecordModel extends ChangeNotifier {
     Map<String, dynamic> post = {
       'event_date': toDayDate,
       'liquor': allOrderedLiquor,
-      'member': selectedMember[0],
+      'member': selectedMember[0], // member_idが格納
       'price': priceEditingController.text,
       'memo': memoEditingController.text
     };
@@ -36,6 +38,7 @@ class RecordModel extends ChangeNotifier {
     // todo addLiquorに格納された番号からお酒データを引っ張ってくる
     List<String> addOrderValue = await dbHelper.queryOrderValue(orderedLiquor);
     allOrderedLiquor.add(addOrderValue);
+    allCupCount.add(0);
     notifyListeners();
     orderedLiquor = [];
   }
@@ -49,5 +52,21 @@ class RecordModel extends ChangeNotifier {
   // 画面を再描画する用メソッド
   void displayReload() {
     notifyListeners();
+  }
+
+  // 杯数のプラス処理
+  void plusCount(int index) {
+    allCupCount[index]++;
+    print(allCupCount);
+    displayReload();
+  }
+
+  // 杯数のマイナス処理
+  void minusCount(int index) {
+    if (allCupCount[index] != 0) {
+      allCupCount[index]--;
+      print(allCupCount);
+      displayReload();
+    }
   }
 }
