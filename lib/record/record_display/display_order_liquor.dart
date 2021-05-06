@@ -9,7 +9,7 @@ class DisplayOrderLiquor extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return model.orderedLiquor == null
+    return model.orderedLiquorIndex == null
         ? Container(
             height: 250,
             width: double.infinity,

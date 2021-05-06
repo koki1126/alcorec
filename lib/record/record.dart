@@ -60,7 +60,8 @@ class Record extends StatelessWidget {
                                 color: Colors.orange,
                                 textColor: Colors.white,
                                 onPressed: () async {
-                                  model.orderedLiquor = await showDialog(
+                                  // todo お酒ダイアログリファクタ
+                                  model.orderedLiquorIndex = await showDialog(
                                     context: context,
                                     barrierColor: Colors.black.withOpacity(0.5),
                                     builder: (_) {

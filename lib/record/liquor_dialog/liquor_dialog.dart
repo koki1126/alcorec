@@ -71,12 +71,19 @@ class LiquorDialog extends StatelessWidget {
                                       return HowToDrinkDialog();
                                     },
                                   );
-                                  // todo 途中で入力を中断した時の処理
-                                  Navigator.pop(
-                                    context,
-                                    model.isWayAmountResult(
-                                        snapshot.data[index]['liquor_id']),
-                                  );
+                                  // 途中で入力を中断した時の処理
+                                  if (model.wayAmountResult == null) {
+                                    Navigator.pop(
+                                      context,
+                                    );
+                                  } else {
+                                    Navigator.pop(
+                                      context,
+                                      model.isWayAmountResult(
+                                        snapshot.data[index]['liquor_id'],
+                                      ),
+                                    );
+                                  }
                                 },
                               );
                             },

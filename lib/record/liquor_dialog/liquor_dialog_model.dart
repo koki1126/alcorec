@@ -2,7 +2,7 @@ import 'package:alcorec/database_helper.dart';
 import 'package:flutter/material.dart';
 
 class LiquorDialogModel extends ChangeNotifier {
-  var newLiquorController = TextEditingController();
+  TextEditingController newLiquorController = TextEditingController();
   List<int> wayAmountResult;
   int capacityResult;
 

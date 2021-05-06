@@ -10,7 +10,7 @@ class RecordModel extends ChangeNotifier {
 
   List selectedMember;
   List<Map<String, dynamic>> selectedMemberName;
-  List<int> orderedLiquor;
+  List<int> orderedLiquorIndex;
   List<List<String>> allOrderedLiquor = [];
 
   String toDayDate;
@@ -36,12 +36,13 @@ class RecordModel extends ChangeNotifier {
 
   // ダイアログで選択したお酒をリストに追加
   void createAddLiquorList() async {
-    // todo addLiquorに格納された番号からお酒データを引っ張ってくる
-    List<String> addOrderValue = await dbHelper.queryOrderValue(orderedLiquor);
+    // addLiquorに格納された番号からお酒データを引っ張ってくる
+    List<String> addOrderValue =
+        await dbHelper.queryOrderValue(orderedLiquorIndex);
     allOrderedLiquor.add(addOrderValue);
     allCupCount.add(1);
     notifyListeners();
-    orderedLiquor = [];
+    orderedLiquorIndex = [];
   }
 
   //member_idからmember_nameを検索する
