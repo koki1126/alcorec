@@ -36,13 +36,15 @@ class RecordModel extends ChangeNotifier {
 
   // ダイアログで選択したお酒をリストに追加
   void createAddLiquorList() async {
-    // addLiquorに格納された番号からお酒データを引っ張ってくる
-    List<String> addOrderValue =
-        await dbHelper.queryOrderValue(orderedLiquorIndex);
-    allOrderedLiquor.add(addOrderValue);
-    allCupCount.add(1);
-    notifyListeners();
-    orderedLiquorIndex = [];
+    // ダイアログでお酒、飲み方、量が全て選択されていればok
+    if (orderedLiquorIndex != null) {
+      List<String> addOrderValue =
+          await dbHelper.queryOrderValue(orderedLiquorIndex);
+      allOrderedLiquor.add(addOrderValue);
+      allCupCount.add(1);
+      notifyListeners();
+      orderedLiquorIndex = [];
+    }
   }
 
   //member_idからmember_nameを検索する
