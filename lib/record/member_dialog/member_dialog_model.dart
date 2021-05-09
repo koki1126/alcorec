@@ -11,6 +11,7 @@ class MemberDialogModel extends ChangeNotifier {
 
   // 登録済メンバーの数だけチェックボックスを作る
   void initValue(List memberData) {
+    // todo リファクタ
     int count = memberData.length;
     memberNameList = [];
 
@@ -52,6 +53,8 @@ class MemberDialogModel extends ChangeNotifier {
     };
     final id = await dbHelper.insert(row);
     print('register new member row id: $id');
+    newMemberController.text = '';
+    notifyListeners();
   }
 
   // 全登録済メンバーを取得

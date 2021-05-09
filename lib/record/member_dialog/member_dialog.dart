@@ -73,11 +73,15 @@ class AddToMemberDialog extends StatelessWidget {
                         builder:
                             (BuildContext context, AsyncSnapshot snapshot) {
                           if (snapshot.hasData) {
-                            model.checkboxList == null
-                                ? model.initValue(
-                                    snapshot.data,
-                                  )
-                                : null;
+                            //if (model.checkboxList?.isEmpty ?? true) {
+                            //model.initValue(snapshot.data);
+                            //}
+
+                            model.initValue(snapshot.data);
+
+                            //if (model.checkboxList == null) {
+                            //model.initValue(snapshot.data);
+                            //}
                             return ListView.builder(
                               shrinkWrap: true,
                               itemCount: snapshot.data.length,
