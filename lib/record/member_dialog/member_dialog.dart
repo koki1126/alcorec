@@ -88,11 +88,13 @@ class AddToMemberDialog extends StatelessWidget {
             actions: <Widget>[
               // todo chear処理
               FlatButton(
-                child: Text("Clear"),
-                onPressed: () {},
+                child: Text('Back'),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
               ),
               FlatButton(
-                child: Text("OK"),
+                child: Text('OK'),
                 onPressed: () {
                   model.createSelectedMemberList();
                   Navigator.pop(
