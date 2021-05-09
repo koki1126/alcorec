@@ -107,12 +107,16 @@ class Record extends StatelessWidget {
                                   model.selectedMember = await showDialog(
                                     context: context,
                                     builder: (_) {
-                                      return Provider<List>.value(
-                                        // チェックされている状態ならデータを渡す
-                                        value: model.selectedMember == null
-                                            ? []
-                                            : model.selectedMember[1],
-                                        child: AddToMemberDialog(),
+                                      return WillPopScope(
+                                        // 領域外タップで非表示にしない
+                                        onWillPop: () async => false,
+                                        child: Provider<List>.value(
+                                          // チェックされている状態ならデータを渡す
+                                          value: model.selectedMember == null
+                                              ? []
+                                              : model.selectedMember[1],
+                                          child: AddToMemberDialog(),
+                                        ),
                                       );
                                     },
                                   );
