@@ -37,10 +37,24 @@ class AddToMemberDialog extends StatelessWidget {
                       child: Text('登録'),
                       color: Colors.blue,
                       onPressed: () {
-                        model.newMemberController.text != ''
-                            ? model.memberInsert()
-                            : Container(); // 新規メンバーを追加
-                        //Navigator.pop(context);
+                        if (model.newMemberController.text != '') {
+                          model.memberInsert();
+                        } else {
+                          showDialog(
+                            context: context,
+                            builder: (_) {
+                              return AlertDialog(
+                                content: Text('名前を入力してね'),
+                                actions: <Widget>[
+                                  FlatButton(
+                                    child: Text('Back'),
+                                    onPressed: () => Navigator.pop(context),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        }
                       },
                     ),
                     Container(
