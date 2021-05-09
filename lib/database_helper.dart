@@ -104,8 +104,9 @@ class DatabaseHelper {
     indexList.forEach((index) {
       if (count == 0) {
         sql += ' WHERE member_id = $index';
+      } else {
+        sql += ' OR member_id = $index';
       }
-      sql += ' OR member_id = $index';
       count++;
     });
 
