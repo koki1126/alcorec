@@ -5,7 +5,6 @@ import '../components/header_model.dart/header.dart';
 import 'liquor_dialog/liquor_dialog.dart';
 import 'member_dialog/member_dialog.dart';
 import 'record_display/display_order_liquor.dart';
-import 'record_display/display_selected_member.dart';
 import 'record_model.dart';
 
 class Record extends StatelessWidget {
@@ -94,7 +93,49 @@ class Record extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            DisplaySelectedMember(model: model),
+                            // ! 画面上に選択メンバーを表示
+                            model.selectedMember == null
+                                ? Container()
+                                : Container(
+                                    width: double.infinity,
+                                    child: Wrap(
+                                      direction: Axis.horizontal,
+                                      children: List<Widget>.generate(
+                                          model.selectedMember[0].length,
+                                          (int index) {
+                                        // 可変長サイズのボタンを生成
+                                        return ConstrainedBox(
+                                          constraints:
+                                              BoxConstraints(minWidth: 10),
+                                          child: ButtonTheme(
+                                            minWidth: 10,
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  2, 5, 2, 5),
+                                              child: Container(
+                                                height: 30,
+                                                child: RaisedButton(
+                                                  child: Text(model
+                                                      .selectedMemberName[index]
+                                                          ['member_name']
+                                                      .toString()),
+                                                  color: Colors.white,
+                                                  shape: StadiumBorder(
+                                                    side: BorderSide(
+                                                        color: Colors.orange),
+                                                  ),
+                                                  onPressed: () {
+                                                    // todo 選択削除
+                                                  },
+                                                  splashColor: Colors.orange,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        );
+                                      }),
+                                    ),
+                                  ),
                             SizedBox(height: 10),
                             SizedBox(
                               height: 40,
